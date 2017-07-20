@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://hzchirs.github.io/post/rails-query-object-pattern/</loc>
+    <lastmod>2017-06-22T11:58:09+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hzchirs.github.io/post/rails-dangerous-migration/</loc>
+    <lastmod>2016-12-10T11:58:09+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hzchirs.github.io/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://hzchirs.github.io/tags/database/</loc>
+    <lastmod>2016-12-10T11:58:09+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://hzchirs.github.io/</loc>
+    <lastmod>2017-06-22T11:58:09+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://hzchirs.github.io/tags/migration/</loc>
+    <lastmod>2016-12-10T11:58:09+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://hzchirs.github.io/post/</loc>
+    <lastmod>2017-06-22T11:58:09+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://hzchirs.github.io/tags/programming/</loc>
+    <lastmod>2017-06-22T11:58:09+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://hzchirs.github.io/tags/rails/</loc>
+    <lastmod>2017-06-22T11:58:09+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://hzchirs.github.io/tags/refactor/</loc>
+    <lastmod>2017-06-22T11:58:09+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://hzchirs.github.io/tags/ruby/</loc>
+    <lastmod>2017-06-22T11:58:09+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://hzchirs.github.io/tags/</loc>
+    <lastmod>2016-12-10T11:58:09+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+</urlset>

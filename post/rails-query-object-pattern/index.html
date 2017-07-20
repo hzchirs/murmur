@@ -1,0 +1,182 @@
+
+<!DOCTYPE html>
+<html lang="en-us">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta content="" name="keywords">
+<meta content="Rails 專案重構之 Query Object Pattern - HzChris" property="og:title">
+<title>Rails 專案重構之 Query Object Pattern | HzChris</title>
+<link rel="stylesheet" href="https://hzchirs.github.io//css/style.css">
+<link rel="stylesheet" href="https://hzchirs.github.io//css/custom.css">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/atelier-sulphurpool-light.min.css" integrity="sha256-Zd1icfZ72UBmsId/mUcagrmN7IN5Qkrvh75ICHIQVTk=" crossorigin="anonymous" />
+
+
+<body>
+<header>
+  <section class="section">
+    <div class="container">
+      <nav class="nav">
+        <div class="nav-left">
+          <a class="nav-item" href="https://hzchirs.github.io/"><h1 class="title is-4">HzChris</h1></a>
+        </div>
+        <div class="nav-right">
+          <nav class="nav-item level is-mobile">
+            
+          </nav>
+        </div>
+      </nav>
+    </div>
+  </section>
+</header>
+
+<section class="section">
+  <div class="container">
+    <h2 class="subtitle is-6">June 22, 2017</h2>
+    <h1 class="title">Rails 專案重構之 Query Object Pattern</h1>
+    
+      <div class="tags">
+    
+        <a class="button is-link" href="/tags/ruby">Ruby</a>
+    
+        <a class="button is-link" href="/tags/rails">Rails</a>
+    
+        <a class="button is-link" href="/tags/refactor">Refactor</a>
+    
+        <a class="button is-link" href="/tags/programming">Programming</a>
+    
+</div>
+
+    
+    <div class="content">
+      <p>在 Rails 專案中，資料查詢是幾乎不可避免的事情，幸好 Rails 裡有 ActiveRecord 可以幫助我們少寫許多的 SQL，
+讓程式碼看起來更簡潔易讀，如果是常用的查詢也可以抽成 scope。
+但隨著專案成長，對於資料查詢的需求通常會愈來愈大，query 的邏輯也愈趨複雜，此時會發現 controller 跟 model 漸漸充斥著雜亂的 query。</p>
+
+<p>舉個簡單的例子來說明：假如今天在 controller 發現這樣的 code:
+</p>
+
+<pre><code class="language-ruby">class VideosController &lt; ApplicationController
+  def index
+    @pupular = Video
+                 .joins(:comments)
+                 .group('videos.id')
+                 .order('count(videos.id) desc')
+                 .limit(5) 
+  end
+end
+</code></pre>
+
+<p>此時基於 &ldquo;thin controller, fat model&rdquo; 的原則，將他整理到 model:</p>
+
+<pre><code class="language-ruby">class Video &lt; ActiveRecord::Base
+  has_many :comments
+
+  scope :popular,
+    -&gt; { joins(:comments).group('videos.id').order('count(videos.id) desc').limit(5) }
+end
+</code></pre>
+
+<p>隨著專案成長， model 會漸漸充斥愈來愈多的 scope 和 class method:</p>
+
+<pre><code class="language-ruby">class Video &lt; ActiveRecord::Base
+  has_many :comments
+
+  scope :popular,
+    -&gt; { joins(:comments).group('videos.id').order('count(videos.id) desc').limit(5) }
+
+  scope :recent, -&gt; { ... }
+  scope :most_clicked, -&gt; { ... }
+  scope :foo, -&gt; (bar) do
+    sql = &lt;&lt;-SQL
+    ...
+    SQL
+
+    find_by_sql(sql)
+  end
+
+  def self.baz
+    ...
+  end
+
+  ...
+end
+</code></pre>
+
+<p>此時會產生一些問題：</p>
+
+<ul>
+<li>model 的職責過於複雜</li>
+<li>model 的 code 變得難以維護</li>
+</ul>
+
+<h2 id="query-object">Query Object</h2>
+
+<p>為了解決上述問題，故有人提出了 Query Object 模式。
+Query Object 是一種將複雜的 Query 單獨封裝，成為具有單一職責，且易於測試的物件。</p>
+
+<p>例如上面的 <code>Video.popular</code> 可以抽出來變成:</p>
+
+<pre><code class="language-ruby">class Video::PopularQuery
+  attr_reader :relation
+
+  def initialize(relation = Video.all)
+    @relation = relation
+  end
+
+  def call
+    relation
+      .joins(:comments)
+      .group('videos.id')
+      .order('count(videos.id) desc')
+      .limit(5)
+  end
+end
+</code></pre>
+
+<p>這樣就可以將負責 popular video 的 query 從 model 中獨立出來，成為一個方便測試且具備單一職責的物件，也讓 model 更 &lsquo;thin&rsquo; 一點。</p>
+
+<pre><code class="language-ruby">Video::PopularQuery.new.call.each do |video|
+  puts video.name
+end
+</code></pre>
+
+<p>但並不是說用了 Query Object 就不用 scope，像 <code>scope :active, -&gt; { where(active: true) }</code> 這種單純且一目瞭然的部分就沒有特別封裝的必要。</p>
+
+<p>那意思是複雜的 query 就不能用 scope 嗎？這也未必，畢竟 <code>Video.popular</code> 比起 <code>Video::PopularQuery.new.call</code> 還是方便得多；
+如果我想同時享受到 scope 的方便與 query object 的好處，有辦法做得到嗎？當然是有的，摻在一起<del>做撒尿牛丸</del>就好了。</p>
+
+<pre><code class="language-ruby">class Video &lt; ActiveRecord::Base
+  has_many :comments
+
+  scope :popular,
+    -&gt; { Video::PopularQuery.new.call }
+end
+</code></pre>
+
+<p>如此一來，你就得到了一個封裝好且易於測試的 query 物件，同時又保有 scope 的方便性，並提升了 model 的可讀性與可維護性。</p>
+
+<h2 id="參考資料">參考資料</h2>
+
+<ul>
+<li><a href="https://neiro.io/2016/10/05/query-objects-in-ruby-on-rails.html">Query Object in Ruby on Rails</a></li>
+<li><a href="https://www.sitepoint.com/7-design-patterns-to-refactor-mvc-components-in-rails/">7 Design Patterns to Refactor MVC Components in Rails</a></li>
+<li><a href="http://craftingruby.com/posts/2015/06/29/query-objects-through-scopes.html">Delegating to Query Objects through ActiveRecord scopes</a></li>
+</ul>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>Copyright © 2017 by HzChris</p>
+  </div>
+</section>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+</body>

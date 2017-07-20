@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+<html lang="en-us">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta content="" name="keywords">
+<meta content="Rails: 不安全的 migration - HzChris" property="og:title">
+<title>Rails: 不安全的 migration | HzChris</title>
+<link rel="stylesheet" href="https://hzchirs.github.io//css/style.css">
+<link rel="stylesheet" href="https://hzchirs.github.io//css/custom.css">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/atelier-sulphurpool-light.min.css" integrity="sha256-Zd1icfZ72UBmsId/mUcagrmN7IN5Qkrvh75ICHIQVTk=" crossorigin="anonymous" />
+
+
+<body>
+<header>
+  <section class="section">
+    <div class="container">
+      <nav class="nav">
+        <div class="nav-left">
+          <a class="nav-item" href="https://hzchirs.github.io/"><h1 class="title is-4">HzChris</h1></a>
+        </div>
+        <div class="nav-right">
+          <nav class="nav-item level is-mobile">
+            
+          </nav>
+        </div>
+      </nav>
+    </div>
+  </section>
+</header>
+
+<section class="section">
+  <div class="container">
+    <h2 class="subtitle is-6">December 10, 2016</h2>
+    <h1 class="title">Rails: 不安全的 migration</h1>
+    
+      <div class="tags">
+    
+        <a class="button is-link" href="/tags/ruby">Ruby</a>
+    
+        <a class="button is-link" href="/tags/rails">Rails</a>
+    
+        <a class="button is-link" href="/tags/migration">Migration</a>
+    
+        <a class="button is-link" href="/tags/database">Database</a>
+    
+</div>
+
+    
+    <div class="content">
+      <p>在 Rails 建立 migration 是一個很常見的行為，但是魔鬼藏在細節裡，悲劇往往就是在認為一切都理所當然的時候發生。</p>
+
+<p>想像一個情境：
+目前有一個由 Rails5 ActionCable 開發的聊天室，運作良好，有數百萬筆訊息存在 Message 這個 model。有天老闆心血來潮，要你幫這個聊天室加上『已讀』功能，你會怎麼做？
+
+你心想『那就在 messages 這張表加一個欄位來判斷是不是已讀吧！』並快速地寫下這樣的 migration：</p>
+
+<pre><code class="language-ruby">class AddReadToMessages &lt; ActiveRecord::Migration
+  add_column :messages, :read, :boolean, default: false
+end
+</code></pre>
+
+<p>使用 ActiveRecord 內建的方法，很容易的就可以寫出上面的 migration，但這其實藏著很大的陷阱：</p>
+
+<ol>
+<li>建立有 default 值的欄位時，DB 會去 touch 到 table 中的每一筆資料。</li>
+<li>Rails Migration 會將操作都包在 transaction 中，因此在 transaction 結束前， table 會被鎖住。</li>
+<li>對線上（也就是生產環境）的資料表做這樣的操作，會導致系統的 downtime。</li>
+</ol>
+
+<p>只要 table 中有一定的資料量（數十萬筆）就可以明顯感受到 migration 的時間變得很長，而且 production 的環境並不容許這樣的 migration。那該怎麼解決這個問題呢？</p>
+
+<h2 id="solution">Solution</h2>
+
+<p>還好，Postgres 建立 null 值欄位的速度是很快的，因此可以將上述的 migration 拆成幾個步驟：(以下解法適用於Postgres)</p>
+
+<ol>
+<li>建立欄位，不指定 default 值。</li>
+<li>提前 commit transaction，避免鎖住 table。</li>
+<li>將 default 值填入新增的欄位。</li>
+<li>最後再指定新增欄位的 default 值。</li>
+</ol>
+
+<pre><code class="language-ruby">class AddReadToMessages &lt; ActiveRecord::Migration
+  add_column :messages, :read, :boolean
+  commit_db_transaction # 提前 commit
+  
+  Message.find_in_batches do |messages|
+    Message.where(id: messages.map(&amp;:id)).update_all({
+      read: false
+    })
+  end
+  change_column_default :messages, :read, false
+end
+</code></pre>
+
+<p>雖然這樣 migration 還是得跑很久，不過 table 不會被鎖住且仍然能夠正常寫入，也不會造成 production 的 downtime。</p>
+
+<h2 id="gem-strong-migrations">Gem: strong_migrations</h2>
+
+<p>除了上面描述的例子之外，還有許多的 migration 都隱含一些陷阱：</p>
+
+<ul>
+<li>增加 index</li>
+<li>重新命名 column</li>
+<li>改面 column 的類型</li>
+<li>…etc</li>
+</ul>
+
+<p>實在很難在每次的 migration 都能夠注意到自己的操作是否安全。
+<code>strong_migrations</code> 就是用來防止你手滑的工具。
+當你沒有遵照安全的方式去寫 migration ，在 migrate 時 strong_migrations 就會阻止這次的 migration，並且提示你應該怎麼做（如下）。</p>
+
+<pre><code class="language-log">rake aborted!
+StandardError: An error has occurred, this and all later migrations canceled:
+ __          __     _____ _______ _
+ \ \        / /\   |_   _|__   __| |
+  \ \  /\  / /  \    | |    | |  | |
+   \ \/  \/ / /\ \   | |    | |  | |
+    \  /\  / ____ \ _| |_   | |  |_|
+     \/  \/_/    \_\_____|  |_|  (_)
+Adding a column with a non-null default requires the entire table and indexes 
+to be rewritten. Instead:
+1. Add the column without a default value
+2. Commit the transaction
+3. Backfill the column
+4. Add the default value
+</code></pre>
+
+<p>雖然有些麻煩，但可以避免很多的悲劇，讓你少爆幾次肝，相當實用！</p>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>Copyright © 2017 by HzChris</p>
+  </div>
+</section>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+</body>
