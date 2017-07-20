@@ -2,67 +2,67 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on HzChris</title>
-    <link>https://hzchirs.github.io/tags/</link>
+    <link>https://hzchirs.github.io/blog/tags/</link>
     <description>Recent content in Tags on HzChris</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>zh-tw</language>
     <copyright>Copyright © 2017 by HzChris</copyright>
     <lastBuildDate>Sat, 10 Dec 2016 11:58:09 +0800</lastBuildDate>
     
-	<atom:link href="https://hzchirs.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://hzchirs.github.io/blog/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Database</title>
-      <link>https://hzchirs.github.io/tags/database/</link>
+      <link>https://hzchirs.github.io/blog/tags/database/</link>
       <pubDate>Sat, 10 Dec 2016 11:58:09 +0800</pubDate>
       
-      <guid>https://hzchirs.github.io/tags/database/</guid>
+      <guid>https://hzchirs.github.io/blog/tags/database/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Migration</title>
-      <link>https://hzchirs.github.io/tags/migration/</link>
+      <link>https://hzchirs.github.io/blog/tags/migration/</link>
       <pubDate>Sat, 10 Dec 2016 11:58:09 +0800</pubDate>
       
-      <guid>https://hzchirs.github.io/tags/migration/</guid>
+      <guid>https://hzchirs.github.io/blog/tags/migration/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Programming</title>
-      <link>https://hzchirs.github.io/tags/programming/</link>
+      <link>https://hzchirs.github.io/blog/tags/programming/</link>
       <pubDate>Thu, 22 Jun 2017 11:58:09 +0800</pubDate>
       
-      <guid>https://hzchirs.github.io/tags/programming/</guid>
+      <guid>https://hzchirs.github.io/blog/tags/programming/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Rails</title>
-      <link>https://hzchirs.github.io/tags/rails/</link>
+      <link>https://hzchirs.github.io/blog/tags/rails/</link>
       <pubDate>Thu, 22 Jun 2017 11:58:09 +0800</pubDate>
       
-      <guid>https://hzchirs.github.io/tags/rails/</guid>
+      <guid>https://hzchirs.github.io/blog/tags/rails/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Refactor</title>
-      <link>https://hzchirs.github.io/tags/refactor/</link>
+      <link>https://hzchirs.github.io/blog/tags/refactor/</link>
       <pubDate>Thu, 22 Jun 2017 11:58:09 +0800</pubDate>
       
-      <guid>https://hzchirs.github.io/tags/refactor/</guid>
+      <guid>https://hzchirs.github.io/blog/tags/refactor/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Ruby</title>
-      <link>https://hzchirs.github.io/tags/ruby/</link>
+      <link>https://hzchirs.github.io/blog/tags/ruby/</link>
       <pubDate>Thu, 22 Jun 2017 11:58:09 +0800</pubDate>
       
-      <guid>https://hzchirs.github.io/tags/ruby/</guid>
+      <guid>https://hzchirs.github.io/blog/tags/ruby/</guid>
       <description></description>
     </item>
     

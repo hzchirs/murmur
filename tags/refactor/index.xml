@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Refactor on HzChris</title>
-    <link>https://hzchirs.github.io/tags/refactor/</link>
+    <link>https://hzchirs.github.io/blog/tags/refactor/</link>
     <description>Recent content in Refactor on HzChris</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>zh-tw</language>
     <copyright>Copyright © 2017 by HzChris</copyright>
     <lastBuildDate>Thu, 22 Jun 2017 11:58:09 +0800</lastBuildDate>
     
-	<atom:link href="https://hzchirs.github.io/tags/refactor/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://hzchirs.github.io/blog/tags/refactor/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Rails 專案重構之 Query Object Pattern</title>
-      <link>https://hzchirs.github.io/post/rails-query-object-pattern/</link>
+      <link>https://hzchirs.github.io/blog/post/rails-query-object-pattern/</link>
       <pubDate>Thu, 22 Jun 2017 11:58:09 +0800</pubDate>
       
-      <guid>https://hzchirs.github.io/post/rails-query-object-pattern/</guid>
+      <guid>https://hzchirs.github.io/blog/post/rails-query-object-pattern/</guid>
       <description>&lt;p&gt;在 Rails 專案中，資料查詢是幾乎不可避免的事情，幸好 Rails 裡有 ActiveRecord 可以幫助我們少寫許多的 SQL，
 讓程式碼看起來更簡潔易讀，如果是常用的查詢也可以抽成 scope。
 但隨著專案成長，對於資料查詢的需求通常會愈來愈大，query 的邏輯也愈趨複雜，此時會發現 controller 跟 model 漸漸充斥著雜亂的 query。&lt;/p&gt;
