@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on HzChris</title>
+    <link>https://hzchirs.github.io/murmur/post/</link>
+    <description>Recent content in Posts on HzChris</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-tw</language>
+    <copyright>Copyright © 2017 by HzChris</copyright>
+    <lastBuildDate>Sat, 18 Nov 2017 09:20:36 +0800</lastBuildDate>
+    
+	<atom:link href="https://hzchirs.github.io/murmur/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>HHKB layout 的客制鍵盤 &#43; Maxkey 灰階 &#43; XDA 球帽開箱</title>
+      <link>https://hzchirs.github.io/murmur/post/unboxing-hhkb-layout-xd60-with-maxkey-ashen-and-xda-pbt-the-max/</link>
+      <pubDate>Sat, 18 Nov 2017 09:20:36 +0800</pubDate>
+      
+      <guid>https://hzchirs.github.io/murmur/post/unboxing-hhkb-layout-xd60-with-maxkey-ashen-and-xda-pbt-the-max/</guid>
+      <description>&lt;p&gt;一直想要組一個跟 HHKB 一樣配置的機械鍵盤放在公司，除了再買一隻 HHKB 之外，
+似乎就只有客製化一途；剛好在 Facebook 看到機械鍵盤愛好者的社團有在幫忙組客製化鍵盤，
+在做了一些詢問之後就下訂了，後來才知道社團版主是鍵鼠版名人貝瑞大。
+原本預計要 11 月底左右才拿得到，結果沒想到上禮拜就好了，真是意外的驚喜。
+&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>淺談Ruby的參數傳遞</title>
+      <link>https://hzchirs.github.io/murmur/post/%E6%B7%BA%E8%AB%87ruby%E7%9A%84%E5%8F%83%E6%95%B8%E5%82%B3%E9%81%9E/</link>
+      <pubDate>Wed, 30 Aug 2017 12:36:52 +0800</pubDate>
+      
+      <guid>https://hzchirs.github.io/murmur/post/%E6%B7%BA%E8%AB%87ruby%E7%9A%84%E5%8F%83%E6%95%B8%E5%82%B3%E9%81%9E/</guid>
+      <description>&lt;p&gt;以前學計概的時候，知道參數傳遞有分為幾種方式，分別為 &lt;code&gt;call by value&lt;/code&gt;，&lt;code&gt;call by reference&lt;/code&gt;，以及 &lt;code&gt;call by address&lt;/code&gt;
+(其實原本的說法裡沒有&lt;code&gt;call by address&lt;/code&gt;，詳情後述)&lt;/p&gt;
+
+&lt;p&gt;那麼，在 Ruby 中，參數是以什麼方式去進行傳遞的呢？
+通常 Google 之後就會發現，Ruby 是 &lt;code&gt;call by value&lt;/code&gt; 的，但是這個 &lt;code&gt;call by value&lt;/code&gt; 跟以往所認知的 &lt;code&gt;call by value&lt;/code&gt; 又不太ㄧ樣，
+讓我們來做個實驗：
+&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>用 Gitlab Pages 取代 Github Pages 建立靜態網站</title>
+      <link>https://hzchirs.github.io/murmur/post/use-gitlab-pages-instead-of-github-pages/</link>
+      <pubDate>Wed, 26 Jul 2017 09:44:54 +0800</pubDate>
+      
+      <guid>https://hzchirs.github.io/murmur/post/use-gitlab-pages-instead-of-github-pages/</guid>
+      <description>&lt;p&gt;前幾天發現 Github Page  自訂 domain 無法支援 SSL 之後，就開始在尋找替代的解法。
+後來發現 Gitlab 也推出了 Gitlab Pages，在設定上跟 Github 相當類似，幾乎可以無痛轉移，而且還有一些Github 沒有的優勢：
+&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Rails 專案重構之 Query Object Pattern</title>
+      <link>https://hzchirs.github.io/murmur/post/rails-query-object-pattern/</link>
+      <pubDate>Thu, 22 Jun 2017 11:58:09 +0800</pubDate>
+      
+      <guid>https://hzchirs.github.io/murmur/post/rails-query-object-pattern/</guid>
+      <description>&lt;p&gt;在 Rails 專案中，資料查詢是幾乎不可避免的事情，幸好 Rails 裡有 ActiveRecord 可以幫助我們少寫許多的 SQL，
+讓程式碼看起來更簡潔易讀，如果是常用的查詢也可以抽成 scope。
+但隨著專案成長，對於資料查詢的需求通常會愈來愈大，query 的邏輯也愈趨複雜，此時會發現 controller 跟 model 漸漸充斥著雜亂的 query。&lt;/p&gt;
+
+&lt;p&gt;舉個簡單的例子來說明：假如今天在 controller 發現這樣的 code:
+&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Rails: 不安全的 migration</title>
+      <link>https://hzchirs.github.io/murmur/post/rails-dangerous-migration/</link>
+      <pubDate>Sat, 10 Dec 2016 11:58:09 +0800</pubDate>
+      
+      <guid>https://hzchirs.github.io/murmur/post/rails-dangerous-migration/</guid>
+      <description>&lt;p&gt;在 Rails 建立 migration 是一個很常見的行為，但是魔鬼藏在細節裡，悲劇往往就是在認為一切都理所當然的時候發生。&lt;/p&gt;
+
+&lt;p&gt;想像一個情境：
+目前有一個由 Rails5 ActionCable 開發的聊天室，運作良好，有數百萬筆訊息存在 Message 這個 model。有天老闆心血來潮，要你幫這個聊天室加上『已讀』功能，你會怎麼做？
+
+你心想『那就在 messages 這張表加一個欄位來判斷是不是已讀吧！』並快速地寫下這樣的 migration：&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

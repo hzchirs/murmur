@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Argument Passing on HzChris</title>
+    <link>https://hzchirs.github.io/murmur/tags/argument-passing/</link>
+    <description>Recent content in Argument Passing on HzChris</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-tw</language>
+    <copyright>Copyright © 2017 by HzChris</copyright>
+    <lastBuildDate>Wed, 30 Aug 2017 12:36:52 +0800</lastBuildDate>
+    
+	<atom:link href="https://hzchirs.github.io/murmur/tags/argument-passing/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>淺談Ruby的參數傳遞</title>
+      <link>https://hzchirs.github.io/murmur/post/%E6%B7%BA%E8%AB%87ruby%E7%9A%84%E5%8F%83%E6%95%B8%E5%82%B3%E9%81%9E/</link>
+      <pubDate>Wed, 30 Aug 2017 12:36:52 +0800</pubDate>
+      
+      <guid>https://hzchirs.github.io/murmur/post/%E6%B7%BA%E8%AB%87ruby%E7%9A%84%E5%8F%83%E6%95%B8%E5%82%B3%E9%81%9E/</guid>
+      <description>&lt;p&gt;以前學計概的時候，知道參數傳遞有分為幾種方式，分別為 &lt;code&gt;call by value&lt;/code&gt;，&lt;code&gt;call by reference&lt;/code&gt;，以及 &lt;code&gt;call by address&lt;/code&gt;
+(其實原本的說法裡沒有&lt;code&gt;call by address&lt;/code&gt;，詳情後述)&lt;/p&gt;
+
+&lt;p&gt;那麼，在 Ruby 中，參數是以什麼方式去進行傳遞的呢？
+通常 Google 之後就會發現，Ruby 是 &lt;code&gt;call by value&lt;/code&gt; 的，但是這個 &lt;code&gt;call by value&lt;/code&gt; 跟以往所認知的 &lt;code&gt;call by value&lt;/code&gt; 又不太ㄧ樣，
+讓我們來做個實驗：
+&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

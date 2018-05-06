@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta content="" name="keywords">
+<meta content="Migration - HzChris" property="og:title">
+<title>Migration | HzChris</title>
+<link rel="stylesheet" href="https://hzchirs.github.io/murmur/css/style.css">
+<link rel="stylesheet" href="https://hzchirs.github.io/murmur/css/custom.css">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/atelier-sulphurpool-light.min.css" />
+
+
+<header>
+  <section class="section">
+    <div class="container">
+      <nav class="nav">
+        <div class="nav-left">
+          <a class="nav-item" href="https://hzchirs.github.io/murmur"><h1 class="title is-4">HzChris</h1></a>
+        </div>
+        <div class="nav-right">
+          <nav class="nav-item level is-mobile">
+            
+          </nav>
+        </div>
+      </nav>
+    </div>
+  </section>
+</header>
+
+<section class="section">
+  <div class="container">
+    
+    <article>
+      <h2 class="subtitle is-6">December 10, 2016</h2>
+      <h1 class="title"><a href="https://hzchirs.github.io/murmur/post/rails-dangerous-migration/">Rails: 不安全的 migration</a></h1>
+      
+        <div class="tags">
+    
+        <a class="button is-link" href="/murmur/tags/ruby">Ruby</a>
+    
+        <a class="button is-link" href="/murmur/tags/rails">Rails</a>
+    
+        <a class="button is-link" href="/murmur/tags/migration">Migration</a>
+    
+        <a class="button is-link" href="/murmur/tags/database">Database</a>
+    
+</div>
+
+      
+      <div class="content">
+        在 Rails 建立 migration 是一個很常見的行為，但是魔鬼藏在細節裡，悲劇往往就是在認為一切都理所當然的時候發生。
+想像一個情境： 目前有一個由 Rails5 ActionCable 開發的聊天室，運作良好，有數百萬筆訊息存在 Message 這個 model。有天老闆心血來潮，要你幫這個聊天室加上『已讀』功能，你會怎麼做？ 你心想『那就在 messages 這張表加一個欄位來判斷是不是已讀吧！』並快速地寫下這樣的 migration：
+
+        
+        ...<a class="button is-link" href="https://hzchirs.github.io/murmur/post/rails-dangerous-migration/" style="height:28px">
+          Read more
+          <span class="icon is-small">
+            <i class="fa fa-angle-double-right"></i>
+          </span>
+        </a>
+        
+      </div>
+    </article>
+    
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <nav class="level is-mobile">
+      <div class="level-left">
+        <div class="level-item">
+          
+          <a class="button is-disabled">
+            <span class="icon is-small is-marginless">
+              <i class="fa fa-angle-left"></i>
+            </span>
+            Newer
+          </a>
+          
+        </div>
+      </div>
+      <div class="level-right is-marginless">
+        <div class="level-item">
+          
+          <a class="button is-disabled">
+            Older
+            <span class="icon is-small is-marginless">
+              <i class="fa fa-angle-right"></i>
+            </span>
+          </a>
+          
+        </div>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>Copyright © 2017 by HzChris</p>
+  </div>
+</section>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-103426647-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
