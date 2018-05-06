@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Migration on HzChris</title>
-    <link>https://hzchirs.github.io/blog/tags/migration/</link>
+    <link>https://blog.hzchris.space/tags/migration/</link>
     <description>Recent content in Migration on HzChris</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
     <copyright>Copyright © 2017 by HzChris</copyright>
     <lastBuildDate>Sat, 10 Dec 2016 11:58:09 +0800</lastBuildDate>
     
-	<atom:link href="https://hzchirs.github.io/blog/tags/migration/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.hzchris.space/tags/migration/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Rails: 不安全的 migration</title>
-      <link>https://hzchirs.github.io/blog/post/rails-dangerous-migration/</link>
+      <link>https://blog.hzchris.space/post/rails-dangerous-migration/</link>
       <pubDate>Sat, 10 Dec 2016 11:58:09 +0800</pubDate>
       
-      <guid>https://hzchirs.github.io/blog/post/rails-dangerous-migration/</guid>
+      <guid>https://blog.hzchris.space/post/rails-dangerous-migration/</guid>
       <description>&lt;p&gt;在 Rails 建立 migration 是一個很常見的行為，但是魔鬼藏在細節裡，悲劇往往就是在認為一切都理所當然的時候發生。&lt;/p&gt;
 
 &lt;p&gt;想像一個情境：
