@@ -2,112 +2,112 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on HzChris</title>
-    <link>https://hzchirs.github.io/murmur/tags/</link>
+    <link>https://blog.hzchris.space/tags/</link>
     <description>Recent content in Tags on HzChris</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
     <copyright>Copyright © 2017 by HzChris</copyright>
     <lastBuildDate>Wed, 30 Aug 2017 12:36:52 +0800</lastBuildDate>
     
-	<atom:link href="https://hzchirs.github.io/murmur/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.hzchris.space/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Argument Passing</title>
-      <link>https://hzchirs.github.io/murmur/tags/argument-passing/</link>
+      <link>https://blog.hzchris.space/tags/argument-passing/</link>
       <pubDate>Wed, 30 Aug 2017 12:36:52 +0800</pubDate>
       
-      <guid>https://hzchirs.github.io/murmur/tags/argument-passing/</guid>
+      <guid>https://blog.hzchris.space/tags/argument-passing/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Database</title>
-      <link>https://hzchirs.github.io/murmur/tags/database/</link>
+      <link>https://blog.hzchris.space/tags/database/</link>
       <pubDate>Sat, 10 Dec 2016 11:58:09 +0800</pubDate>
       
-      <guid>https://hzchirs.github.io/murmur/tags/database/</guid>
+      <guid>https://blog.hzchris.space/tags/database/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Github Pages</title>
-      <link>https://hzchirs.github.io/murmur/tags/github-pages/</link>
+      <link>https://blog.hzchris.space/tags/github-pages/</link>
       <pubDate>Wed, 26 Jul 2017 09:44:54 +0800</pubDate>
       
-      <guid>https://hzchirs.github.io/murmur/tags/github-pages/</guid>
+      <guid>https://blog.hzchris.space/tags/github-pages/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Gitlab Pages</title>
-      <link>https://hzchirs.github.io/murmur/tags/gitlab-pages/</link>
+      <link>https://blog.hzchris.space/tags/gitlab-pages/</link>
       <pubDate>Wed, 26 Jul 2017 09:44:54 +0800</pubDate>
       
-      <guid>https://hzchirs.github.io/murmur/tags/gitlab-pages/</guid>
+      <guid>https://blog.hzchris.space/tags/gitlab-pages/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Migration</title>
-      <link>https://hzchirs.github.io/murmur/tags/migration/</link>
+      <link>https://blog.hzchris.space/tags/migration/</link>
       <pubDate>Sat, 10 Dec 2016 11:58:09 +0800</pubDate>
       
-      <guid>https://hzchirs.github.io/murmur/tags/migration/</guid>
+      <guid>https://blog.hzchris.space/tags/migration/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Programming</title>
-      <link>https://hzchirs.github.io/murmur/tags/programming/</link>
+      <link>https://blog.hzchris.space/tags/programming/</link>
       <pubDate>Thu, 22 Jun 2017 11:58:09 +0800</pubDate>
       
-      <guid>https://hzchirs.github.io/murmur/tags/programming/</guid>
+      <guid>https://blog.hzchris.space/tags/programming/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Rails</title>
-      <link>https://hzchirs.github.io/murmur/tags/rails/</link>
+      <link>https://blog.hzchris.space/tags/rails/</link>
       <pubDate>Thu, 22 Jun 2017 11:58:09 +0800</pubDate>
       
-      <guid>https://hzchirs.github.io/murmur/tags/rails/</guid>
+      <guid>https://blog.hzchris.space/tags/rails/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Refactor</title>
-      <link>https://hzchirs.github.io/murmur/tags/refactor/</link>
+      <link>https://blog.hzchris.space/tags/refactor/</link>
       <pubDate>Thu, 22 Jun 2017 11:58:09 +0800</pubDate>
       
-      <guid>https://hzchirs.github.io/murmur/tags/refactor/</guid>
+      <guid>https://blog.hzchris.space/tags/refactor/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Ruby</title>
-      <link>https://hzchirs.github.io/murmur/tags/ruby/</link>
+      <link>https://blog.hzchris.space/tags/ruby/</link>
       <pubDate>Wed, 30 Aug 2017 12:36:52 +0800</pubDate>
       
-      <guid>https://hzchirs.github.io/murmur/tags/ruby/</guid>
+      <guid>https://blog.hzchris.space/tags/ruby/</guid>
       <description></description>
     </item>
     
     <item>
       <title>機械鍵盤</title>
-      <link>https://hzchirs.github.io/murmur/tags/%E6%A9%9F%E6%A2%B0%E9%8D%B5%E7%9B%A4/</link>
+      <link>https://blog.hzchris.space/tags/%E6%A9%9F%E6%A2%B0%E9%8D%B5%E7%9B%A4/</link>
       <pubDate>Sat, 18 Nov 2017 09:20:36 +0800</pubDate>
       
-      <guid>https://hzchirs.github.io/murmur/tags/%E6%A9%9F%E6%A2%B0%E9%8D%B5%E7%9B%A4/</guid>
+      <guid>https://blog.hzchris.space/tags/%E6%A9%9F%E6%A2%B0%E9%8D%B5%E7%9B%A4/</guid>
       <description></description>
     </item>
     
     <item>
       <title>鍵帽</title>
-      <link>https://hzchirs.github.io/murmur/tags/%E9%8D%B5%E5%B8%BD/</link>
+      <link>https://blog.hzchris.space/tags/%E9%8D%B5%E5%B8%BD/</link>
       <pubDate>Sat, 18 Nov 2017 09:20:36 +0800</pubDate>
       
-      <guid>https://hzchirs.github.io/murmur/tags/%E9%8D%B5%E5%B8%BD/</guid>
+      <guid>https://blog.hzchris.space/tags/%E9%8D%B5%E5%B8%BD/</guid>
       <description></description>
     </item>
     
