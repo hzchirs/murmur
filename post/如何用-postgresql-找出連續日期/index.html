@@ -160,7 +160,7 @@ FROM user_visits;
 </code></pre>
 
 <p>我們可以發現，不論 date 有沒有遇到 Gap，row_number 都是連續的。
-再來著把，date 和 row_number 相減看看：</p>
+再來把 date 和 row_number 相減看看：</p>
 
 <pre><code class="language-sql">SELECT date, 
   ROW_NUMBER() OVER(ORDER BY date) AS row_number,
@@ -185,13 +185,13 @@ FROM user_visits;
 </code></pre>
 
 <p>到這一步，可以發現 row_number 的用意了吧？
-如果 <code>date</code> 是連續的，<code>row_number</code> 也是連續的，
-那麼 <code>date - row_number = diff</code> 產生的值就應該相同，而中間只要遇到 Gap，下一個 <code>diff</code> 的結果就會不同。</p>
+如果 date 是連續的，row_number 也是連續的，
+那麼 date - row_number (也就是 diff) 產生的值就應該相同，而中間只要遇到 Gap，下一個 diff 的結果就會不同。</p>
 
-<p><code>date - row_number</code> 所產生出來的 <code>diff</code> 欄位並沒有任何資料上的意義，
-只是用來輔助判斷 <code>date</code> 是不是在同一個組別。</p>
+<p>date - row_number 所產生出來的 diff 欄位並沒有任何資料上的意義，
+只是用來輔助判斷 date 是不是在同一個組別。</p>
 
-<p>因此我們可以判斷，只要 <code>diff</code> 的值相同的資料，都是同一個連續日期的 Group。到這一步，要產生最後的結果就很簡單了，讓我們來完成它吧！</p>
+<p>因此我們可以判斷，只要 diff 的值相同的資料，都是同一個連續日期的 Group。到這一步，要產生最後的結果就很簡單了，讓我們來完成它吧！</p>
 
 <pre><code class="language-sql">WITH t AS (
   SELECT date, 
