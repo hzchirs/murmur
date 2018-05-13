@@ -19,3 +19,13 @@ h1, h2, h3, h4, h5, h6, .title {
 .content {
   font-size: 18px;
 }
+
+.content>code, .content p>code {
+  font-size: 1em;
+  font-family: monospace;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background-color: inherit;
+}
