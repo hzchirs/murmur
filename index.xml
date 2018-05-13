@@ -14,10 +14,10 @@
     
     <item>
       <title>如何在 PostgreSQL 中找出連續日期</title>
-      <link>https://blog.hzchris.space/post/%E5%A6%82%E4%BD%95%E7%94%A8-postgresql-%E6%89%BE%E5%87%BA%E9%80%A3%E7%BA%8C%E6%97%A5%E6%9C%9F/</link>
+      <link>https://blog.hzchris.space/post/how-to-find-consecutive-dates-in-postgresql/</link>
       <pubDate>Sat, 12 May 2018 22:07:56 +0800</pubDate>
       
-      <guid>https://blog.hzchris.space/post/%E5%A6%82%E4%BD%95%E7%94%A8-postgresql-%E6%89%BE%E5%87%BA%E9%80%A3%E7%BA%8C%E6%97%A5%E6%9C%9F/</guid>
+      <guid>https://blog.hzchris.space/post/how-to-find-consecutive-dates-in-postgresql/</guid>
       <description>&lt;p&gt;工作上需要從資料庫找出使用者連續上站天數，
 找了一些相關的資源，其實解法相當多，但大多都是 SQL Server 的解法，
 從中找了一個比較&lt;a href=&#34;https://stackoverflow.com/questions/20402089/detect-consecutive-dates-ranges-using-sql&#34;&gt;簡單優雅的&lt;/a&gt;
