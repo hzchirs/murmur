@@ -22,8 +22,8 @@
 直到不久前看到 Github Page 也開始支援自訂網域的 Https ，就花了點時間把部落格從 Gitlab 遷移到 Github 了。
 設定步驟 首先，到網域供應商那邊(我的是gandi) 把 CNAME 對應到個人的 github 頂層網域，我的 github 帳號是 hzchirs，所以頂層網域就是 hzchirs.github.io，而我希望把子網域 blog.hzchris.space 對應到 Github Page，所以設定會像這樣：
 注意 Hostname 欄位的 username.github.io. 最後面有個點，不要漏掉了。
-當設定完成之後，要等個數小時至一天才會生效，如果想要確定是否生效，可以使用 dig 來查詢，如果設定已經生效，則自訂網域與 github.io 都應該指向同一個 IP：
-$ dig blog.hzchris.space +noall +answer sni.github.map.fastly.net. 735	IN	A	185.199.111.153 sni.github.map.fastly.net. 735	IN	A	185.199.110.153 sni.github.map.fastly.net. 735	IN	A	185.199.109.153 sni.</description>
+當設定完成之後，要等個數小時至一天才會生效，如果想要確定是否生效，可以使用 dig 來查 詢，生效的自訂網域與 github.io 都應該指向同一個 IP：
+$ dig blog.hzchris.space +noall +answer sni.github.map.fastly.net. 735	IN	A	185.199.111.153 sni.github.map.fastly.net. 735	IN	A	185.199.110.153 sni.github.map.fastly.net. 735	IN	A	185.</description>
     </item>
     
     <item>

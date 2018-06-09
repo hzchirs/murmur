@@ -70,7 +70,8 @@
 
 <p>注意 Hostname 欄位的 <code>username.github.io.</code> 最後面有個點，不要漏掉了。</p>
 
-<p>當設定完成之後，要等個數小時至一天才會生效，如果想要確定是否生效，可以使用 <code>dig</code> 來查詢，如果設定已經生效，則自訂網域與 github.io 都應該指向同一個 IP：</p>
+<p>當設定完成之後，要等個數小時至一天才會生效，如果想要確定是否生效，可以使用 <code>dig</code> 來查
+詢，生效的自訂網域與 github.io 都應該指向同一個 IP：</p>
 
 <pre><code class="language-shell">$ dig blog.hzchris.space +noall +answer
 
@@ -87,7 +88,7 @@ sni.github.map.fastly.net. 735	IN	A	185.199.109.153
 sni.github.map.fastly.net. 735	IN	A	185.199.108.153
 </code></pre>
 
-<p>生效之後，進到部落格 repository 的 Settings，拉到 Github Pages 這個區塊填上 Custom domain 並儲存，如果之前的設定有成功的話，<strong>Enforce HTTPS</strong> 這個欄位應該可以打勾，勾完之後看看你的設定上面有沒有出現：</p>
+<p>之後，進到部落格 repository 的 Settings，在 Github Pages 這個設定區塊填上 Custom domain 並儲存，如果之前的設定有成功的話，<strong>Enforce HTTPS</strong> 這個欄位應該可以打勾，勾完之後看看設定上面有沒有出現：</p>
 
 <blockquote>
 <p><code>Your site is published at https://your.custom.url</code></p>
