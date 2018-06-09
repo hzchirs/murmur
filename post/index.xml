@@ -7,10 +7,24 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
     <copyright>Copyright © 2018 by HzChris</copyright>
-    <lastBuildDate>Sat, 12 May 2018 22:07:56 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 09 Jun 2018 12:13:25 +0800</lastBuildDate>
     
 	<atom:link href="https://blog.hzchris.space/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>讓自訂網域的 Github Page 支援 HTTPS</title>
+      <link>https://blog.hzchris.space/post/get-https-support-on-github-page-with-custom-domain/</link>
+      <pubDate>Sat, 09 Jun 2018 12:13:25 +0800</pubDate>
+      
+      <guid>https://blog.hzchris.space/post/get-https-support-on-github-page-with-custom-domain/</guid>
+      <description>之前都是用 Gitlab + Let&amp;rsquo;s Encrypt 的方式來讓 blog 有綠色的鎖頭，不過 Let&amp;rsquo;s Encrypt 每 90 天就要更新一次，有時候會因爲偷懶沒更新導致憑證過期XD，很不方便。
+直到不久前看到 Github Page 也開始支援自訂網域的 Https ，就花了點時間把部落格從 Gitlab 遷移到 Github 了。
+設定步驟 首先，到網域供應商那邊(我的是gandi) 把 CNAME 對應到個人的 github 頂層網域，我的 github 帳號是 hzchirs，所以頂層網域就是 hzchirs.github.io，而我希望把子網域 blog.hzchris.space 對應到 Github Page，所以設定會像這樣：
+注意 Hostname 欄位的 username.github.io. 最後面有個點，不要漏掉了。
+當設定完成之後，要等個數小時至一天才會生效，如果想要確定是否生效，可以使用 dig 來查詢，如果設定已經生效，則自訂網域與 github.io 都應該指向同一個 IP：
+$ dig blog.hzchris.space +noall +answer sni.github.map.fastly.net. 735	IN	A	185.199.111.153 sni.github.map.fastly.net. 735	IN	A	185.199.110.153 sni.github.map.fastly.net. 735	IN	A	185.199.109.153 sni.</description>
+    </item>
     
     <item>
       <title>如何在 PostgreSQL 中找出連續日期</title>
@@ -21,7 +35,7 @@
       <description>&lt;p&gt;工作上需要從資料庫找出使用者連續上站天數，
 找了一些相關的資源，其實解法相當多，但大多都是 SQL Server 的解法，
 從中找了一個比較&lt;a href=&#34;https://stackoverflow.com/questions/20402089/detect-consecutive-dates-ranges-using-sql&#34;&gt;簡單優雅的&lt;/a&gt;
-來研究，並修改成 &lt;a href=&#34;http://www.sqlfiddle.com/#!17/3e264/24/0&#34;&gt;PostgreSQL 的版本&lt;/a&gt;，&lt;/p&gt;
+來研究，並修改成 &lt;a href=&#34;http://www.sqlfiddle.com/#!17/3e264/24/0&#34;&gt;PostgreSQL 的版本&lt;/a&gt;。&lt;/p&gt;
 
 &lt;p&gt;在接下來的說明中，會產生一個最簡單，單純只有時間序列的 table，並用這個 table 來
 一步步說明實現方式。

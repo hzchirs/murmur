@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta content="" name="keywords">
-<meta content="用 Gitlab Pages 取代 Github Pages 建立靜態網站 - HzChris" property="og:title">
-<title>用 Gitlab Pages 取代 Github Pages 建立靜態網站 | HzChris</title>
+<meta content="讓自訂網域的 Github Page 支援 HTTPS - HzChris" property="og:title">
+<title>讓自訂網域的 Github Page 支援 HTTPS | HzChris</title>
 <link rel="stylesheet" href="https://blog.hzchris.space/css/style.css">
 <link rel="stylesheet" href="https://blog.hzchris.space/css/custom.css">
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -45,12 +45,10 @@
 
 <section class="section">
   <div class="container">
-    <h2 class="subtitle is-6">July 26, 2017</h2>
-    <h1 class="title">用 Gitlab Pages 取代 Github Pages 建立靜態網站</h1>
+    <h2 class="subtitle is-6">June 9, 2018</h2>
+    <h1 class="title">讓自訂網域的 Github Page 支援 HTTPS</h1>
     
       <div class="tags">
-    
-        <a class="button is-link" href="/tags/gitlab-pages">Gitlab Pages</a>
     
         <a class="button is-link" href="/tags/github-pages">Github Pages</a>
     
@@ -58,39 +56,51 @@
 
     
     <div class="content">
-      <p>前幾天發現 Github Page  自訂 domain 無法支援 SSL 之後，就開始在尋找替代的解法。
-後來發現 Gitlab 也推出了 Gitlab Pages，在設定上跟 Github 相當類似，幾乎可以無痛轉移，而且還有一些Github 沒有的優勢：
-</p>
+      
 
-<ul>
-<li>可以免費建立 Private Repository</li>
-<li>可以支援自訂 Domain 與 SSL</li>
-<li>不需要手動 build，Gitlab 預設支援多個 SSG(Static Site Generator)，如 jekyll, hexo, hugo 等</li>
-</ul>
+<p>之前都是用 Gitlab + Let&rsquo;s Encrypt 的方式來讓 blog 有綠色的鎖頭，不過 Let&rsquo;s Encrypt 每 90 天就要更新一次，有時候會因爲偷懶沒更新導致憑證過期XD，很不方便。</p>
 
-<p>在使用上跟 Github Page 非常相似，都是需要建立專案，但 Gitlab 需要多設定一個 <code>.gitlab-ci.yml</code>，
-該如何設定可以參考 <a href="https://gitlab.com/pages">Gitlab Pages</a>，裡面有各個 SSG 的範例，以 hugo 來說會是長這樣：</p>
+<p>直到不久前看到 Github Page 也開始<a href="https://blog.github.com/2018-05-01-github-pages-custom-domains-https/">支援自訂網域的 Https</a> ，就花了點時間把部落格從 Gitlab 遷移到 Github 了。</p>
 
-<pre><code class="language-yml">image: registry.gitlab.com/pages/hugo:0.26
+<h2 id="設定步驟">設定步驟</h2>
 
-test:
-  script:
-  - hugo
-  except:
-  - master
+<p>首先，到網域供應商那邊(我的是<a href="https://www.gandi.net/en">gandi</a>) 把 CNAME 對應到個人的 github 頂層網域，我的 github 帳號是 hzchirs，所以頂層網域就是 <code>hzchirs.github.io</code>，而我希望把子網域 <code>blog.hzchris.space</code> 對應到 Github Page，所以設定會像這樣：</p>
 
-pages:
-  script:
-  - hugo
-  artifacts:
-    paths:
-    - public
-  only:
-  - master
+<p><img src="/img/cname.png" alt="CNAME 設定" /></p>
+
+<p>注意 Hostname 欄位的 <code>username.github.io.</code> 最後面有個點，不要漏掉了。</p>
+
+<p>當設定完成之後，要等個數小時至一天才會生效，如果想要確定是否生效，可以使用 <code>dig</code> 來查詢，如果設定已經生效，則自訂網域與 github.io 都應該指向同一個 IP：</p>
+
+<pre><code class="language-shell">$ dig blog.hzchris.space +noall +answer
+
+sni.github.map.fastly.net. 735	IN	A	185.199.111.153
+sni.github.map.fastly.net. 735	IN	A	185.199.110.153
+sni.github.map.fastly.net. 735	IN	A	185.199.109.153
+sni.github.map.fastly.net. 735	IN	A	185.199.108.153
+
+$ dig hzchirs.github.io +noall +answer
+
+sni.github.map.fastly.net. 735	IN	A	185.199.111.153
+sni.github.map.fastly.net. 735	IN	A	185.199.110.153
+sni.github.map.fastly.net. 735	IN	A	185.199.109.153
+sni.github.map.fastly.net. 735	IN	A	185.199.108.153
 </code></pre>
 
-<p>在設定好 <code>.gitlab-ci.yml</code> 之後，直接 push，Gitlab CI 會幫你 build &amp; deploy，
-然後就可以在 <code>namespace.gitlab.io/project_name</code> 看到產生的結果，非常方便。</p>
+<p>生效之後，進到部落格 repository 的 Settings，拉到 Github Pages 這個區塊填上 Custom domain 並儲存，如果之前的設定有成功的話，<strong>Enforce HTTPS</strong> 這個欄位應該可以打勾，勾完之後看看你的設定上面有沒有出現：</p>
+
+<blockquote>
+<p><code>Your site is published at https://your.custom.url</code></p>
+</blockquote>
+
+<p>有的話就大功告成啦。最後設定那邊應該會像下面這樣：</p>
+
+<p><img src="/img/github-page-setting.png" alt="Github Page 設定" /></p>
+
+<p>這邊要注意一件事，如果 repository 原本就已經有設定 custom domain 的話，需要先清掉再重新輸入一次，才能讓 HTTPS 成功運作。</p>
+
+<p>Github Page 這次的更新其實不止是支援 HTTPS，同時還可以享有 CDN，因此遷移之後速度變快非常有感，只是官方的文件寫的不是非常清楚，多繞了一點路，如果在設定上遇到問題的話，也歡迎留言討論😃。</p>
+
     </div>
   </div>
 </section>
