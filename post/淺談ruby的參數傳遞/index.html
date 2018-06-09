@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zh-tw">
 <meta charset="UTF-8">
@@ -149,13 +148,22 @@ p str #=&gt; &quot;Hello, World&quot;
 
 <section class="section">
   <div class="container">
-    <aside><div id="disqus_thread"></div></aside>
+    <aside>
+      <div id="disqus_thread"></div>
+    </aside>
     <script type="text/javascript">
+      var disqus_config = function () {
+        this.page.url = 'https:\/\/blog.hzchris.space\/post\/%E6%B7%BA%E8%AB%87ruby%E7%9A%84%E5%8F%83%E6%95%B8%E5%82%B3%E9%81%9E\/';  
+        this.page.identifier = '\/post\/%E6%B7%BA%E8%AB%87ruby%E7%9A%84%E5%8F%83%E6%95%B8%E5%82%B3%E9%81%9E\/'; 
+      };
+
       var disqus_shortname = 'hzchris';
-      (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+     
+      (function() { 
+      var d = document, s = d.createElement('script');
+      s.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
       })();
     </script>
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
