@@ -67,12 +67,11 @@
 
 <p><img src="/img/cname.png" alt="CNAME 設定" /></p>
 
-<p>注意 Hostname 欄位的 <code>username.github.io.</code> 最後面有個點，不要漏掉了。</p>
+<p><strong>注意:</strong> Hostname 欄位的 <code>username.github.io.</code> 最後面有個點，不要漏掉了。</p>
 
-<p>當設定完成之後，要等個數小時至一天才會生效，如果想要確定是否生效，可以使用 <code>dig</code> 來查
-詢，生效的自訂網域與 github.io 都應該指向同一個 IP：</p>
+<p>當設定完成之後，要<strong>數小時至一天</strong>才會生效，如果想要確定是否生效，可以使用 <code>dig</code> 來查詢，生效的自訂網域與 github.io 都應該指向同一個 IP：</p>
 
-<pre><code class="language-shell">$ dig blog.hzchris.space +noall +answer
+<pre><code class="language-zsh">$ dig blog.hzchris.space +noall +answer
 
 sni.github.map.fastly.net. 735	IN	A	185.199.111.153
 sni.github.map.fastly.net. 735	IN	A	185.199.110.153
@@ -142,6 +141,12 @@ sni.github.map.fastly.net. 735	IN	A	185.199.108.153
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/languages/javascript.min.js"></script>
 
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/languages/vim.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/languages/shell-session.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/languages/bash.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/languages/zsh.min.js"></script>
 
 <script>hljs.initHighlightingOnLoad();</script>
 <script>
