@@ -175,8 +175,7 @@ job 並行，container 越多，可以並行的 job 也就越多。</p></li>
     - v1-gem-
 </code></pre>
 
-<p>這邊 CircleCI 給了一個彈性，可以設定多組 key， 萬一使用第一個 key (v1-gem-{{ checksum &ldquo;Gemfile.lock&rdquo; }}) 找不到符合的結果，就會使用 <code>v1-gem-</code> 這個 key，去比對最近
-產生，且前綴符合 <code>v1-gem-</code> 的快取資料。</p>
+<p>這邊 CircleCI 給了一個彈性，可以設定多組 key， 萬一使用第一個 key (<code>v1-gem-{{ checksum &quot;Gemfile.lock&quot; }}</code>) 找不到符合的結果，就會使用 <code>v1-gem-</code> 這個 key，去比對最近產生，且前綴符合 <code>v1-gem-</code> 的快取資料。</p>
 
 <h3 id="不要設計太小的-job">不要設計太小的 job</h3>
 
