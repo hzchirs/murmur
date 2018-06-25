@@ -7,10 +7,22 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
     <copyright>Copyright © 2018 by HzChris</copyright>
-    <lastBuildDate>Sat, 09 Jun 2018 12:13:25 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 16 Jun 2018 11:43:14 +0800</lastBuildDate>
     
 	<atom:link href="https://blog.hzchris.space/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>CiricleCI Workflow: 讓 build 時間減少 50% 的設定心得</title>
+      <link>https://blog.hzchris.space/post/boost-ci-build-with-circleci-workflow/</link>
+      <pubDate>Sat, 16 Jun 2018 11:43:14 +0800</pubDate>
+      
+      <guid>https://blog.hzchris.space/post/boost-ci-build-with-circleci-workflow/</guid>
+      <description>財報狗用 CircleCI 有一段時間了，一開始用的時候還是 1.0， 2.0 還在 beta 階段。我們的專案在 1.0 上面一直運作良好，所以也沒有想說要換，直到 CircleCI 發佈 2018/8/31 之後將不再支援 1.0，我們才開始考慮要遷移專案 XD，順便趁着這次 的遷移導入的 2.0 的新功能: workflow。
+Workflow 簡介 CircleCI 在 2.0 中推出了 workflow 這個新功能，官網的介紹如下：
+ A workflow is a set of rules for defining a collection of jobs and their run order. Workflows support complex job orchestration using a simple set of configuration keys to help you resolve failures sooner.
+ 簡單來說，workflow 提供了一種做法，讓你可以把 CI 的每個步驟拆分成一個個獨立的 jobs，jobs 之間遵照一定的執行順序或是並行，萬一發生失敗，只要針對失敗的 job 去做處理就好了，大大提升反應速度。</description>
+    </item>
     
     <item>
       <title>讓自訂網域的 Github Page 支援 HTTPS</title>
@@ -107,18 +119,6 @@ $ dig blog.hzchris.space +noall +answer sni.github.map.fastly.net. 735	IN	A	185.
 目前有一個由 Rails5 ActionCable 開發的聊天室，運作良好，有數百萬筆訊息存在 Message 這個 model。有天老闆心血來潮，要你幫這個聊天室加上『已讀』功能，你會怎麼做？
 
 你心想『那就在 messages 這張表加一個欄位來判斷是不是已讀吧！』並快速地寫下這樣的 migration：&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://blog.hzchris.space/post/boost-ci-build-with-circleci-workflow/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.hzchris.space/post/boost-ci-build-with-circleci-workflow/</guid>
-      <description>e++ date = &amp;ldquo;2018-06-16T11:43:14+08:00&amp;rdquo; title = &amp;ldquo;CiricleCI Workflow: 讓 build 時間減少 50% 的設定心得&amp;rdquo; slug = &amp;ldquo;boost-ci-build-with-circleci-workflow&amp;rdquo; categories = [&amp;lsquo;Pragramming&amp;rsquo;] tags = [&amp;lsquo;CI&amp;rsquo;, &amp;lsquo;Workflow&amp;rsquo;] +++
-財報狗用 CircleCI 有一段時間了，一開始用的時候還是 1.0，2.0 還在 beta 階段。我們的專案在 1.0 上面一直運作良好，所以也沒有想說要換，直到 CircleCI 發佈 2018/8/31 之後將不再支援 1.0，我們才開始考慮要遷移專案 XD，順便趁着這次的遷移導入的 2.0 的新功能: workflow。
-Workflow 簡介 CircleCI 在 2.0 中推出了 workflow 這個新功能，官網的介紹如下：
- A workflow is a set of rules for defining a collection of jobs and their run order. Workflows support complex job orchestration using a simple set of configuration keys to help you resolve failures sooner.</description>
     </item>
     
   </channel>
