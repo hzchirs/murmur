@@ -3,8 +3,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta content="" name="keywords">
-<meta content="CiricleCI Workflow: 讓 build 時間減少 50% 的設定心得 - HzChris" property="og:title">
-<title>CiricleCI Workflow: 讓 build 時間減少 50% 的設定心得 | HzChris</title>
+<meta content=" - HzChris" property="og:title">
+<title> | HzChris</title>
 <link rel="stylesheet" href="https://blog.hzchris.space/css/style.css">
 <link rel="stylesheet" href="https://blog.hzchris.space/css/custom.css">
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -44,20 +44,19 @@
 
 <section class="section">
   <div class="container">
-    <h2 class="subtitle is-6">June 16, 2018</h2>
-    <h1 class="title">CiricleCI Workflow: 讓 build 時間減少 50% 的設定心得</h1>
-    
-      <div class="tags">
-    
-        <a class="button is-link" href="/tags/ci">CI</a>
-    
-        <a class="button is-link" href="/tags/workflow">Workflow</a>
-    
-</div>
-
+    <h2 class="subtitle is-6">January 1, 0001</h2>
+    <h1 class="title"></h1>
     
     <div class="content">
       
+
+<p>e++
+date = &ldquo;2018-06-16T11:43:14+08:00&rdquo;
+title = &ldquo;CiricleCI Workflow: 讓 build 時間減少 50% 的設定心得&rdquo;
+slug = &ldquo;boost-ci-build-with-circleci-workflow&rdquo;
+categories = [&lsquo;Pragramming&rsquo;]
+tags = [&lsquo;CI&rsquo;, &lsquo;Workflow&rsquo;]
++++</p>
 
 <p><a href="https://statementdog.com/">財報狗</a>用 CircleCI 有一段時間了，一開始用的時候還是 1.0，2.0 還在 beta 階段。我們的專案在 1.0 上面一直運作良好，所以也沒有想說要換，直到 CircleCI 發佈 2018/8/31 之後將不再支援 1.0，我們才開始考慮要遷移專案 XD，順便趁着這次的遷移導入的 2.0 的新功能: <strong>workflow</strong>。</p>
 
@@ -87,17 +86,17 @@ job 並行，container 越多，可以並行的 job 也就越多。</p></li>
 說，可以分成以下幾個：</p>
 
 <ul>
-<li><p><strong>a. checkout_code</strong>: 將程式碼從遠端 pull 下來，在 CI 環境中做好路徑設定</p></li>
+<li><p><strong>checkout_code</strong>: 將程式碼從遠端 pull 下來，在 CI 環境中做好路徑設定</p></li>
 
-<li><p><strong>b. bundle_dependencies</strong>: 安裝 rails application 相依性套件</p></li>
+<li><p><strong>bundle_dependencies</strong>: 安裝 rails application 相依性套件</p></li>
 
-<li><p><strong>c. yarn_dependencies</strong>: 安裝前端相依性套件</p></li>
+<li><p><strong>yarn_dependencies</strong>: 安裝前端相依性套件</p></li>
 
-<li><p><strong>d. run_unit_test</strong>: 執行單元測試</p></li>
+<li><p><strong>run_unit_test</strong>: 執行單元測試</p></li>
 
-<li><p><strong>e. run_integration_test</strong>: 執行整合測試</p></li>
+<li><p><strong>run_integration_test</strong>: 執行整合測試</p></li>
 
-<li><p><strong>f. deploy</strong>: 將程式佈署到 production</p></li>
+<li><p><strong>deploy</strong>: 將程式佈署到 production</p></li>
 </ul>
 
 <p>以循序的方式去跑，大約需要花 16 分鐘</p>
@@ -142,8 +141,7 @@ job 並行，container 越多，可以並行的 job 也就越多。</p></li>
 
 <p>剛剛提到 workflow 的好處除了並行縮短執行時間外，還有一點就是可以只重跑失敗的 job，而不需要重跑整個 CI。</p>
 
-<p>爲什麼這很重要呢？在跑 CI 的時候，偶爾會遇到一些 random fails，像是網路突然不穩
-，或是套件安裝因爲不明原因失敗等等，像下面這樣：</p>
+<p>爲什麼這很重要呢？在跑 CI 的時候，偶爾會遇到一些 random fails，像是網路突然不穩，或是套件安裝因爲不明原因失敗等等，像下面這樣：</p>
 
 <p><img src="/img/workflow-failed.png" alt="deploy 階段錯誤" /></p>
 
@@ -173,8 +171,7 @@ job 並行，container 越多，可以並行的 job 也就越多。</p></li>
     - v1-gem-
 </code></pre>
 
-<p>這邊 CircleCI 給了一個彈性，可以設定多組 key， 萬一使用第一個 key (v1-gem-{{
-checksum &ldquo;Gemfile.lock&rdquo; }}) 找不到符合的結果，就會使用 <code>v1-gem-</code> 這個 key，去比對最近
+<p>這邊 CircleCI 給了一個彈性，可以設定多組 key， 萬一使用第一個 key (v1-gem-{{ checksum &ldquo;Gemfile.lock&rdquo; }}) 找不到符合的結果，就會使用 <code>v1-gem-</code> 這個 key，去比對最近
 產生，且前綴符合 <code>v1-gem-</code> 的快取資料。</p>
 
 <h3 id="不要設計太小的-job">不要設計太小的 job</h3>
