@@ -59,6 +59,8 @@
     <div class="content">
       
 
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*ZHsy56SNDn4lLwajoKyeAA.jpeg" alt="fly-to-the-moon" /></p>
+
 <p><a href="https://statementdog.com/">財報狗</a>用 CircleCI 有一段時間了，一開始用的時候還是 1.0，
 2.0 還在 beta 階段。我們的專案在 1.0 上面一直運作良好，所以也沒有想說要換，直到
 CircleCI 發佈 2018/8/31 之後將不再支援 1.0，我們才開始考慮要遷移專案 XD，順便趁着這次
@@ -77,11 +79,8 @@ CircleCI 發佈 2018/8/31 之後將不再支援 1.0，我們才開始考慮要�
 <h2 id="workflow-解決了什麼問題">Workflow 解決了什麼問題？</h2>
 
 <ol>
-<li><p>舊有的 CI 流程都是循序的，像是必須要執行完 <code>bundle install</code> 才可以繼續 <code>yarn
-install</code>，但是這兩個 job 彼此間並沒有相依性，在 workflow 中，可以設計讓沒有相依的
-job 並行，container 越多，可以並行的 job 也就越多。</p></li>
-
-<li><p>用循序的方式執行 job，只要其中一個 job 失敗，就需要整個 CI 重來；而 workflow 中的每一個 job 彼此是獨立的，可以只針對失敗的 job 重跑即可。</p></li>
+<li>CircleCI 1.0 中，CI 的每一步流程都是循序的，像是必須要執行完 bundle install 才可以繼續 yarn install，但是這兩個 job 彼此間並沒有相依性，因此在 workflow 中，可以設計讓沒有相依的 job 並行節省時間；開的 container 越多，可以並行的 job 也就越多。</li>
+<li>用循序的方式執行 job，只要其中一個 job 失敗，就需要整個 CI 重來；而 workflow 中的每一個 job 彼此是獨立的，可以只針對失敗的 job 重跑即可。</li>
 </ol>
 
 <h2 id="workflow-設定">Workflow 設定</h2>
@@ -153,11 +152,11 @@ job 並行，container 越多，可以並行的 job 也就越多。</p></li>
 
 <p><img src="/img/workflow-rerun-failed.png" alt="only rerun failed jobs" /></p>
 
-<h2 id="其他注意事項">其他注意事項</h2>
+<h2 id="善用-cache">善用 Cache</h2>
 
-<h3 id="善用-cache">善用 Cache</h3>
+<p>在 workflow 中，每個 job 都是運作在一個獨立的 container 當中，爲了確保每個 job 可以獨立運行，所以可能會需要前一次 CI 或是前一個 job 產生的一些資料，這時候 cache 就派上用場了。</p>
 
-<p>在 workflow 中，每個 job 都是運作在一個獨立的 container 當中，爲了確保每個 job 可以獨立運行，所以可能會需要前一次 CI 或是前一個 job 產生的一些資料，像是每次跑 <code>bundle install</code> 時，只想要安裝之前沒裝過的 gem ，而不是整包重裝，或是像是跑測試時會需要 bundle 裝好的資料，這時候就需要用到 cache 了。</p>
+<p>舉例來說，像是在 bundle_dependencies 階段會安裝所需要的套件，但是我們並不想要每次跑 CI 的時候都重裝全部的套件，只想要裝之前沒裝過的；又或者是在 run_unit_test階段時，會需要用到在 bundle_dependencies階段裝好的整包套件資料，那這時候我們就可以在 bundle_dependencies階段，把 bundle install 所產生的資料儲存成 cache，等到下一個 job 或是下一次 CI要使用的時候，再用 cache key 把存的資料取出來用。</p>
 
 <p>以 <code>bundle install</code> 爲例，裝好的 bundle 可以用 <code>save_cache</code> 儲存起來：</p>
 
@@ -175,7 +174,8 @@ job 並行，container 越多，可以並行的 job 也就越多。</p></li>
     - v1-gem-
 </code></pre>
 
-<p>這邊 CircleCI 給了一個彈性，可以設定多組 key， 萬一使用第一個 key (<code>v1-gem-{{ checksum &quot;Gemfile.lock&quot; }}</code>) 找不到符合的結果，就會使用 <code>v1-gem-</code> 這個 key，去比對最近產生，且前綴符合 <code>v1-gem-</code> 的快取資料。</p>
+<p>這邊 CircleCI 給了一個彈性，可以設定多組 key， 萬一使用第一個 key
+(<code>v1-gem-{{checksum “Gemfile.lock&quot;}}</code>) 找不到符合的結果，就會使用下一個順位，也就是 <code>v1-gem-</code> 這個 key，去比對最近產生，且前綴符合 <code>v1-gem-</code> 的快取資料。</p>
 
 <h3 id="不要設計太小的-job">不要設計太小的 job</h3>
 
