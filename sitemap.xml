@@ -3,11 +3,6 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://blog.hzchris.space/post/something-about-the-2018-taiwan-election/</loc>
-    <lastmod>2018-12-02T12:28:54+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://blog.hzchris.space/post/boost-ci-build-with-circleci-workflow/</loc>
     <lastmod>2018-06-16T11:43:14+08:00</lastmod>
   </url>
@@ -71,12 +66,6 @@
   </url>
   
   <url>
-    <loc>https://blog.hzchris.space/tags/election/</loc>
-    <lastmod>2018-12-02T12:28:54+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.hzchris.space/tags/github-pages/</loc>
     <lastmod>2018-06-09T12:13:25+08:00</lastmod>
     <priority>0</priority>
@@ -90,7 +79,7 @@
   
   <url>
     <loc>https://blog.hzchris.space/</loc>
-    <lastmod>2018-12-02T12:28:54+08:00</lastmod>
+    <lastmod>2018-06-16T11:43:14+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -102,19 +91,19 @@
   
   <url>
     <loc>https://blog.hzchris.space/post/</loc>
-    <lastmod>2018-12-02T12:28:54+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.hzchris.space/tags/programming/</loc>
-    <lastmod>2017-06-22T11:58:09+08:00</lastmod>
+    <lastmod>2018-06-16T11:43:14+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://blog.hzchris.space/categories/programming/</loc>
     <lastmod>2018-06-16T11:43:14+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.hzchris.space/tags/programming/</loc>
+    <lastmod>2017-06-22T11:58:09+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -149,12 +138,6 @@
   </url>
   
   <url>
-    <loc>https://blog.hzchris.space/tags/taiwan/</loc>
-    <lastmod>2018-12-02T12:28:54+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.hzchris.space/categories/tools/</loc>
     <lastmod>2018-06-09T12:13:25+08:00</lastmod>
     <priority>0</priority>
@@ -167,31 +150,25 @@
   </url>
   
   <url>
-    <loc>https://blog.hzchris.space/tags/%E6%A9%9F%E6%A2%B0%E9%8D%B5%E7%9B%A4/</loc>
-    <lastmod>2017-11-18T09:20:36+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.hzchris.space/categories/%E6%A9%9F%E6%A2%B0%E9%8D%B5%E7%9B%A4/</loc>
     <lastmod>2017-11-18T09:20:36+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://blog.hzchris.space/categories/%E6%B5%81%E6%B0%B4%E5%B8%B3/</loc>
-    <lastmod>2018-12-02T12:28:54+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.hzchris.space/tags/%E9%8D%B5%E5%B8%BD/</loc>
+    <loc>https://blog.hzchris.space/tags/%E6%A9%9F%E6%A2%B0%E9%8D%B5%E7%9B%A4/</loc>
     <lastmod>2017-11-18T09:20:36+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://blog.hzchris.space/categories/%E9%8D%B5%E5%B8%BD/</loc>
+    <lastmod>2017-11-18T09:20:36+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.hzchris.space/tags/%E9%8D%B5%E5%B8%BD/</loc>
     <lastmod>2017-11-18T09:20:36+08:00</lastmod>
     <priority>0</priority>
   </url>
