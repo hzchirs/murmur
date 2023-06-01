@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta content="" name="keywords">
+<meta content="CiricleCI Workflow: 讓 build 時間減少 50% 的設定心得 - HzChris" property="og:title">
+<title>CiricleCI Workflow: 讓 build 時間減少 50% 的設定心得 | HzChris</title>
+<link rel="stylesheet" href="https://hzchirs.github.io/murmur//css/style.css">
+<link rel="stylesheet" href="https://hzchirs.github.io/murmur//css/custom.css">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+
+<body>
+<header>
+  <section class="section">
+    <div class="container">
+      <nav class="nav">
+        <div class="nav-left">
+          <a class="nav-item" href="https://hzchirs.github.io/murmur/"><h1 class="title is-4">HzChris</h1></a>
+        </div>
+        <div class="nav-right">
+          <nav class="nav-item level is-mobile">
+            
+            <a class="level-item" href="https://github.com/hzchirs">
+              <span class="icon">
+                <i class="fa fa-github"></i>
+              </span>
+            </a>
+            
+            <a class="level-item" href="https://www.facebook.com/hzchirs">
+              <span class="icon">
+                <i class="fa fa-facebook-square"></i>
+              </span>
+            </a>
+            
+          </nav>
+        </div>
+      </nav>
+    </div>
+  </section>
+</header>
+
+<section class="section">
+  <div class="container">
+    <h2 class="subtitle is-6">June 16, 2018</h2>
+    <h1 class="title">CiricleCI Workflow: 讓 build 時間減少 50% 的設定心得</h1>
+    
+      <div class="tags">
+    
+        <a class="button is-link" href="/murmur/tags/ci">CI</a>
+    
+        <a class="button is-link" href="/murmur/tags/workflow">Workflow</a>
+    
+</div>
+
+    
+    <div class="content">
+      <p><img src="https://cdn-images-1.medium.com/max/2000/1*ZHsy56SNDn4lLwajoKyeAA.jpeg" alt="fly-to-the-moon"></p>
+<p><a href="https://statementdog.com/">財報狗</a>用 CircleCI 有一段時間了，一開始用的時候還是 1.0，
+2.0 還在 beta 階段。我們的專案在 1.0 上面一直運作良好，所以也沒有想說要換，直到
+CircleCI 發佈 2018/8/31 之後將不再支援 1.0，我們才開始考慮要遷移專案 XD，順便趁着這次
+的遷移導入的 2.0 的新功能: <a href="https://circleci.com/docs/2.0/workflows/"><strong>workflow</strong></a>。</p>
+<h2 id="workflow-簡介">Workflow 簡介</h2>
+<p>CircleCI 在 2.0 中推出了 workflow 這個新功能，官網的介紹如下：</p>
+<blockquote>
+<p>A workflow is a set of rules for defining a collection of jobs and their run order. Workflows support complex job orchestration using a simple set of configuration keys to help you resolve failures sooner.</p>
+</blockquote>
+<p>簡單來說，workflow 提供了一種做法，讓你可以把 CI 的每個步驟拆分成一個個獨立的 jobs，jobs 之間遵照一定的執行順序或是並行，萬一發生失敗，只要針對失敗的 job 去做處理就好了，大大提升反應速度。</p>
+<h2 id="workflow-解決了什麼問題">Workflow 解決了什麼問題？</h2>
+<ol>
+<li>CircleCI 1.0 中，CI 的每一步流程都是循序的，像是必須要執行完 bundle install 才可以繼續 yarn install，但是這兩個 job 彼此間並沒有相依性，因此在 workflow 中，可以設計讓沒有相依的 job 並行節省時間；開的 container 越多，可以並行的 job 也就越多。</li>
+<li>用循序的方式執行 job，只要其中一個 job 失敗，就需要整個 CI 重來；而 workflow 中的每一個 job 彼此是獨立的，可以只針對失敗的 job 重跑即可。</li>
+</ol>
+<h2 id="workflow-設定">Workflow 設定</h2>
+<p>在使用 Workflow 之前，需要先想好專案的 CI 流程可以獨立成哪幾個步驟；以財報狗專案來
+說，可以分成以下幾個：</p>
+<ul>
+<li>
+<p><strong>checkout_code</strong>: 將程式碼從遠端 pull 下來，在 CI 環境中做好路徑設定</p>
+</li>
+<li>
+<p><strong>bundle_dependencies</strong>: 安裝 rails application 相依性套件</p>
+</li>
+<li>
+<p><strong>yarn_dependencies</strong>: 安裝前端相依性套件</p>
+</li>
+<li>
+<p><strong>run_unit_test</strong>: 執行單元測試</p>
+</li>
+<li>
+<p><strong>run_integration_test</strong>: 執行整合測試</p>
+</li>
+<li>
+<p><strong>deploy</strong>: 將程式佈署到 production</p>
+</li>
+</ul>
+<p>以循序的方式去跑，大約需要花 16 分鐘</p>
+<p><img src="/img/ci-1-build.png" alt="CI 1.0 build"></p>
+<p>每次都循序跑實在有點沒效率，以上面的流程來說， <code>bundle_dependencies</code>、
+<code>yarn_dependencies</code> 可以在 <code>checkout_code</code> 結束之後同時執行； <code>run_unit_test</code> 以及
+<code>run_integration_test</code> 則是在 dependencies 安裝結束之後就可以並行，這也就是 workflow 最主要的功能，在 CI 中只要定義好每一個 job ，就可以很輕易的設定好 workflow：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#e6db74">workflows</span>:
+  <span style="color:#e6db74">version</span>: <span style="color:#ae81ff">2</span>
+  <span style="color:#e6db74">build_and_test</span>: <span style="color:#75715e"># Workflow 的名稱</span>
+    <span style="color:#e6db74">jobs</span>:
+      <span style="color:#f92672">-</span> checkout_code
+      <span style="color:#f92672">-</span> <span style="color:#e6db74">bundle_dependencies</span>:
+          <span style="color:#e6db74">requires</span>: <span style="color:#75715e"># 相依於哪些 jobs</span>
+            <span style="color:#f92672">-</span> checkout_code
+      <span style="color:#f92672">-</span> <span style="color:#e6db74">yarn_dependencies</span>:
+          <span style="color:#e6db74">requires</span>:
+            <span style="color:#f92672">-</span> checkout_code
+      <span style="color:#f92672">-</span> <span style="color:#e6db74">run_unit_tests</span>:
+          <span style="color:#e6db74">requires</span>:
+            <span style="color:#f92672">-</span> bundle_dependencies
+      <span style="color:#f92672">-</span> <span style="color:#e6db74">run_integration_tests</span>:
+          <span style="color:#e6db74">requires</span>:
+            <span style="color:#f92672">-</span> yarn_dependencies
+            <span style="color:#f92672">-</span> bundle_dependencies
+      <span style="color:#f92672">-</span> <span style="color:#e6db74">deploy</span>:
+          <span style="color:#e6db74">requires</span>:
+            <span style="color:#f92672">-</span> run_unit_tests
+            <span style="color:#f92672">-</span> run_integration_tests
+</code></pre></div><p>設定好之後，CircleCI 就會自動以 workflow 的方式執行：</p>
+<p><img src="/img/workflow.png" alt="workflow"></p>
+<p>紅色框框圈起來的是並行執行的部分，可以看到最花時間的 <code>run_unit_test</code> 以及 <code>run_integration_test</code> 因爲並行的關係，只花了 6 分鐘就跑完了，而整個 CI 的時間則足足從 16 分鐘縮短到 7 分多鐘，速度變快超有感的阿！</p>
+<h2 id="重跑-workflow-失敗的-jobs">重跑 workflow 失敗的 jobs</h2>
+<p>剛剛提到 workflow 的好處除了並行縮短執行時間外，還有一點就是可以只重跑失敗的 job，而不需要重跑整個 CI。</p>
+<p>爲什麼這很重要呢？在跑 CI 的時候，偶爾會遇到一些 random fails，像是網路突然不穩，或是套件安裝因爲不明原因失敗等等，像下面這樣：</p>
+<p><img src="/img/workflow-failed.png" alt="deploy 階段錯誤"></p>
+<p>仔細檢查會發現是 deploy 階段在 ssh connect 到 server 的過程中 timeout 了，這可能是 server 那邊設定出了點問題，通常這種情況只要進到 server 改好設定，重跑一次 CI 就可以解決，不過如果只是 deploy 階段出錯，重跑還需要重新設定環境、裝套件、跑完測試後才可以 deploy，實在太沒效率了，所以在 workflow 中，很貼心的讓你可以選擇只跑失敗的 jobs，進一步的節省時間。</p>
+<p><img src="/img/workflow-rerun-failed.png" alt="only rerun failed jobs"></p>
+<h2 id="善用-cache">善用 Cache</h2>
+<p>在 workflow 中，每個 job 都是運作在一個獨立的 container 當中，爲了確保每個 job 可以獨立運行，所以可能會需要前一次 CI 或是前一個 job 產生的一些資料，這時候 cache 就派上用場了。</p>
+<p>舉例來說，像是在 bundle_dependencies 階段會安裝所需要的套件，但是我們並不想要每次跑 CI 的時候都重裝全部的套件，只想要裝之前沒裝過的；又或者是在 run_unit_test階段時，會需要用到在 bundle_dependencies階段裝好的整包套件資料，那這時候我們就可以在 bundle_dependencies階段，把 bundle install 所產生的資料儲存成 cache，等到下一個 job 或是下一次 CI要使用的時候，再用 cache key 把存的資料取出來用。</p>
+<p>以 <code>bundle install</code> 爲例，裝好的 bundle 可以用 <code>save_cache</code> 儲存起來：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#f92672">-</span> <span style="color:#e6db74">save_cache</span>:
+    <span style="color:#e6db74">key</span>: v1<span style="color:#f92672">-</span>gem<span style="color:#f92672">-</span>{{ checksum <span style="color:#e6db74">&#34;Gemfile.lock&#34;</span> }}
+    <span style="color:#e6db74">paths</span>:
+      <span style="color:#f92672">-</span> vendor<span style="color:#f92672">/</span>bundle
+</code></pre></div><p>如果之後的 job 或是 build 需要用到這包裝好的 bundle ，只需要 <code>restore_cache</code> 即可：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#e6db74">restore_cache</span>:
+  <span style="color:#e6db74">keys</span>:
+    <span style="color:#f92672">-</span> v1<span style="color:#f92672">-</span>gem<span style="color:#f92672">-</span>{{ checksum <span style="color:#e6db74">&#34;Gemfile.lock&#34;</span> }}
+    <span style="color:#f92672">-</span> v1<span style="color:#f92672">-</span>gem<span style="color:#f92672">-</span>
+</code></pre></div><p>這邊 CircleCI 給了一個彈性，可以設定多組 key， 萬一使用第一個 key
+(<code>v1-gem-{{checksum “Gemfile.lock&quot;}}</code>) 找不到符合的結果，就會使用下一個順位，也就是 <code>v1-gem-</code> 這個 key，去比對最近產生，且前綴符合 <code>v1-gem-</code> 的快取資料。</p>
+<h3 id="不要設計太小的-job">不要設計太小的 job</h3>
+<p>由於每個 job 在運作之前仍然需要準備好所需要的環境與資料才能夠運行，即使有做好 cache，取得 cache 的過程中，只要檔案稍大，仍然需要花費 10 - 20 秒的時間，如果是一個 30 秒內就可以執行完的 command，不太建議拉出來成爲一個獨立的 job，反而會拖慢整個 CI 的速度。</p>
+<h2 id="最後">最後&hellip;</h2>
+<p>還是對 workflow 的設定有些不瞭解的話，可以到我的
+<a href="https://gist.github.com/hzchirs/1040282e5b58df509155613c1d8dbee6">Gist</a> 看詳細的設定
+，有問題或是有什麼 CI 設定上的建議，也歡迎留言討論 😃。</p>
+
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>Copyright © 2023 by HzChris</p>
+  </div>
+</section>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/languages/ruby.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/languages/javascript.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/languages/vim.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/languages/shell-session.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/languages/bash.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/languages/zsh.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-103426647-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>

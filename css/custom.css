@@ -1,0 +1,57 @@
+body {
+  font-family: "Microsoft JhengHei", sans-serif;
+}
+
+.nav {
+  background: transparent;
+}
+
+.nav-item .level-item {
+  margin-top: 2em;
+}
+
+.section {
+  padding: 20px 20px;
+}
+
+h1, h2, h3, h4, h5, h6, .title {
+  font-weight: bold;
+  margin-top: 2em;
+}
+
+.content h1:not(:first-child), .content h2:not(:first-child), .content h3:not(:first-child), .content h4:not(:first-child), .content h5:not(:first-child), .content h6:not(:first-child) {
+  margin-top: 2em;
+  font-weight: bold;
+}
+
+.content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {
+  margin-top: 2em;
+  font-weight: bold;
+}
+
+.content {
+  font-size: 1.4em;
+}
+
+.content pre code {
+  font-size: 1em;
+  font-family: monospace;
+}
+
+.content>code, .content p>code {
+  font-size: 1em;
+  font-family: monospace;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background-color: inherit;
+}
+
+.tags {
+  margin-bottom: 2em;
+}
+
+article+article {
+  margin-top: 2em;
+}
