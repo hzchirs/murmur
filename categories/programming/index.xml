@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Programming on HzChris</title>
-    <link>https://blog.hzchris.space/categories/programming/</link>
+    <link>https://hzchirs.github.io/murmur/categories/programming/</link>
     <description>Recent content in Programming on HzChris</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
     <copyright>Copyright © 2023 by HzChris</copyright>
-    <lastBuildDate>Sat, 16 Jun 2018 11:43:14 +0800</lastBuildDate><atom:link href="https://blog.hzchris.space/categories/programming/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 16 Jun 2018 11:43:14 +0800</lastBuildDate><atom:link href="https://hzchirs.github.io/murmur/categories/programming/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>CiricleCI Workflow: 讓 build 時間減少 50% 的設定心得</title>
-      <link>https://blog.hzchris.space/post/boost-ci-build-with-circleci-workflow/</link>
+      <link>https://hzchirs.github.io/murmur/post/boost-ci-build-with-circleci-workflow/</link>
       <pubDate>Sat, 16 Jun 2018 11:43:14 +0800</pubDate>
       
-      <guid>https://blog.hzchris.space/post/boost-ci-build-with-circleci-workflow/</guid>
+      <guid>https://hzchirs.github.io/murmur/post/boost-ci-build-with-circleci-workflow/</guid>
       <description>財報狗用 CircleCI 有一段時間了，一開始用的時候還是 1.0， 2.0 還在 beta 階段。我們的專案在 1.0 上面一直運作良好，所以也沒有想說要換，直到 CircleCI 發佈 2018/8/31 之後將不再支援 1.0，我們才開始考慮要遷移專案 XD，順便趁着這次 的遷移導入的 2.0 的新功能: workflow。
 Workflow 簡介 CircleCI 在 2.0 中推出了 workflow 這個新功能，官網的介紹如下：
 A workflow is a set of rules for defining a collection of jobs and their run order. Workflows support complex job orchestration using a simple set of configuration keys to help you resolve failures sooner.
@@ -22,10 +22,10 @@ A workflow is a set of rules for defining a collection of jobs and their run ord
     
     <item>
       <title>如何在 PostgreSQL 中找出連續日期</title>
-      <link>https://blog.hzchris.space/post/how-to-find-consecutive-dates-in-postgresql/</link>
+      <link>https://hzchirs.github.io/murmur/post/how-to-find-consecutive-dates-in-postgresql/</link>
       <pubDate>Sat, 12 May 2018 22:07:56 +0800</pubDate>
       
-      <guid>https://blog.hzchris.space/post/how-to-find-consecutive-dates-in-postgresql/</guid>
+      <guid>https://hzchirs.github.io/murmur/post/how-to-find-consecutive-dates-in-postgresql/</guid>
       <description>&lt;p&gt;工作上需要從資料庫找出使用者連續上站天數，
 找了一些相關的資源，其實解法相當多，但大多都是 SQL Server 的解法，
 從中找了一個比較[簡單優雅的]
