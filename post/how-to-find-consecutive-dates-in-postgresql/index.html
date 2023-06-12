@@ -25,6 +25,8 @@
 
 
 
+
+
 <html
   class="not-ready text-sm lg:text-base"
   style="--bg: #fbfbfb"
@@ -49,8 +51,7 @@
   
   <meta name="description" content="工作上需要從資料庫找出使用者連續上站天數，
 找了一些相關的資源，其實解法相當多，但大多都是 SQL Server 的解法，
-從中找了一個比較[簡單優雅的]
-(https://stackoverflow.com/questions/20402089/detect-consecutive-dates-ranges-using-sql)
+從中找了一個比較簡單優雅的
 來研究，並修改成 PostgreSQL 的版本。
 在接下來的說明中，會產生一個最簡單，單純只有時間序列的 table，並用這個 table 來
 一步步說明實現方式。" />
@@ -108,8 +109,7 @@
   <meta property="og:title" content="如何在 PostgreSQL 中找出連續日期" />
 <meta property="og:description" content="工作上需要從資料庫找出使用者連續上站天數，
 找了一些相關的資源，其實解法相當多，但大多都是 SQL Server 的解法，
-從中找了一個比較[簡單優雅的]
-(https://stackoverflow.com/questions/20402089/detect-consecutive-dates-ranges-using-sql)
+從中找了一個比較簡單優雅的
 來研究，並修改成 PostgreSQL 的版本。
 在接下來的說明中，會產生一個最簡單，單純只有時間序列的 table，並用這個 table 來
 一步步說明實現方式。" />
@@ -122,21 +122,19 @@
   <meta itemprop="name" content="如何在 PostgreSQL 中找出連續日期">
 <meta itemprop="description" content="工作上需要從資料庫找出使用者連續上站天數，
 找了一些相關的資源，其實解法相當多，但大多都是 SQL Server 的解法，
-從中找了一個比較[簡單優雅的]
-(https://stackoverflow.com/questions/20402089/detect-consecutive-dates-ranges-using-sql)
+從中找了一個比較簡單優雅的
 來研究，並修改成 PostgreSQL 的版本。
 在接下來的說明中，會產生一個最簡單，單純只有時間序列的 table，並用這個 table 來
 一步步說明實現方式。"><meta itemprop="datePublished" content="2018-05-12T22:07:56+08:00" />
 <meta itemprop="dateModified" content="2018-05-12T22:07:56+08:00" />
-<meta itemprop="wordCount" content="392">
+<meta itemprop="wordCount" content="391">
 <meta itemprop="keywords" content="Database,SQL," />
   
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="如何在 PostgreSQL 中找出連續日期"/>
 <meta name="twitter:description" content="工作上需要從資料庫找出使用者連續上站天數，
 找了一些相關的資源，其實解法相當多，但大多都是 SQL Server 的解法，
-從中找了一個比較[簡單優雅的]
-(https://stackoverflow.com/questions/20402089/detect-consecutive-dates-ranges-using-sql)
+從中找了一個比較簡單優雅的
 來研究，並修改成 PostgreSQL 的版本。
 在接下來的說明中，會產生一個最簡單，單純只有時間序列的 table，並用這個 table 來
 一步步說明實現方式。"/>
@@ -149,12 +147,12 @@
     <header class="mx-auto flex h-[5rem] max-w-3xl px-8 lg:justify-center">
   <div class="relative z-50 mr-auto flex items-center">
     <a
-      class="-translate-x-[1px] -translate-y-0.5 text-3xl font-bold"
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
       href="https://hzchirs.github.io/"
       >HzChris</a
     >
     <div
-      class="btn-dark text-[0] ml-6 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
       role="button"
       aria-label="Dark"
     ></div>
@@ -227,7 +225,7 @@
       
 
 <article>
-  <header class="mb-20">
+  <header class="mb-10">
     <h1 class="!my-0 pb-2.5">如何在 PostgreSQL 中找出連續日期</h1>
 
     
@@ -244,8 +242,7 @@
 
   <section><p>工作上需要從資料庫找出使用者連續上站天數，
 找了一些相關的資源，其實解法相當多，但大多都是 SQL Server 的解法，
-從中找了一個比較[簡單優雅的]
-(<a href="https://stackoverflow.com/questions/20402089/detect-consecutive-dates-ranges-using-sql">https://stackoverflow.com/questions/20402089/detect-consecutive-dates-ranges-using-sql</a>)
+從中找了一個比較<a href="https://stackoverflow.com/questions/20402089/detect-consecutive-dates-ranges-using-sql">簡單優雅的</a>
 來研究，並修改成 <a href="http://www.sqlfiddle.com/#!17/3e264/24/0">PostgreSQL 的版本</a>。</p>
 <p>在接下來的說明中，會產生一個最簡單，單純只有時間序列的 table，並用這個 table 來
 一步步說明實現方式。</p>
@@ -396,13 +393,13 @@ date 旁加上一個連續的數字欄位：</p>
   <footer class="mt-12 flex flex-wrap">
      
     <a
-      class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-2 no-underline dark:bg-white/[8%]"
+      class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-1.5 no-underline dark:bg-white/[8%]"
       href="https://hzchirs.github.io/murmur/tags/database"
       >Database</a
     >
      
     <a
-      class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-2 no-underline dark:bg-white/[8%]"
+      class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-1.5 no-underline dark:bg-white/[8%]"
       href="https://hzchirs.github.io/murmur/tags/sql"
       >SQL</a
     >

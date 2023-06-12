@@ -28,8 +28,7 @@ A workflow is a set of rules for defining a collection of jobs and their run ord
       <guid>https://hzchirs.github.io/murmur/post/how-to-find-consecutive-dates-in-postgresql/</guid>
       <description>&lt;p&gt;工作上需要從資料庫找出使用者連續上站天數，
 找了一些相關的資源，其實解法相當多，但大多都是 SQL Server 的解法，
-從中找了一個比較[簡單優雅的]
-(&lt;a href=&#34;https://stackoverflow.com/questions/20402089/detect-consecutive-dates-ranges-using-sql&#34;&gt;https://stackoverflow.com/questions/20402089/detect-consecutive-dates-ranges-using-sql&lt;/a&gt;)
+從中找了一個比較&lt;a href=&#34;https://stackoverflow.com/questions/20402089/detect-consecutive-dates-ranges-using-sql&#34;&gt;簡單優雅的&lt;/a&gt;
 來研究，並修改成 &lt;a href=&#34;http://www.sqlfiddle.com/#!17/3e264/24/0&#34;&gt;PostgreSQL 的版本&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;在接下來的說明中，會產生一個最簡單，單純只有時間序列的 table，並用這個 table 來
 一步步說明實現方式。&lt;/p&gt;</description>
