@@ -140,7 +140,7 @@ A workflow is a set of rules for defining a collection of jobs and their run ord
   <div class="relative z-50 mr-auto flex items-center">
     <a
       class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
-      href="https://hzchirs.github.io/"
+      href="https://hzchirs.github.io/murmur/"
       >HzChris</a
     >
     <div
@@ -272,7 +272,7 @@ CircleCI 發佈 2018/8/31 之後將不再支援 1.0，我們才開始考慮要�
 </li>
 </ul>
 <p>以循序的方式去跑，大約需要花 16 分鐘</p>
-<p><img src="/img/ci-1-build.png" alt="CI 1.0 build"></p>
+<p><img src="/murmur/img/ci-1-build.png" alt="CI 1.0 build"></p>
 <p>每次都循序跑實在有點沒效率，以上面的流程來說， <code>bundle_dependencies</code>、
 <code>yarn_dependencies</code> 可以在 <code>checkout_code</code> 結束之後同時執行； <code>run_unit_test</code> 以及
 <code>run_integration_test</code> 則是在 dependencies 安裝結束之後就可以並行，這也就是 workflow 最主要的功能，在 CI 中只要定義好每一個 job ，就可以很輕易的設定好 workflow：</p>
@@ -299,14 +299,14 @@ CircleCI 發佈 2018/8/31 之後將不再支援 1.0，我們才開始考慮要�
 </span></span><span style="display:flex;"><span>            <span style="color:#f92672">-</span> run_unit_tests
 </span></span><span style="display:flex;"><span>            <span style="color:#f92672">-</span> run_integration_tests
 </span></span></code></pre></div><p>設定好之後，CircleCI 就會自動以 workflow 的方式執行：</p>
-<p><img src="/img/workflow.png" alt="workflow"></p>
+<p><img src="/murmur/img/workflow.png" alt="workflow"></p>
 <p>紅色框框圈起來的是並行執行的部分，可以看到最花時間的 <code>run_unit_test</code> 以及 <code>run_integration_test</code> 因爲並行的關係，只花了 6 分鐘就跑完了，而整個 CI 的時間則足足從 16 分鐘縮短到 7 分多鐘，速度變快超有感的阿！</p>
 <h2 id="重跑-workflow-失敗的-jobs">重跑 workflow 失敗的 jobs</h2>
 <p>剛剛提到 workflow 的好處除了並行縮短執行時間外，還有一點就是可以只重跑失敗的 job，而不需要重跑整個 CI。</p>
 <p>爲什麼這很重要呢？在跑 CI 的時候，偶爾會遇到一些 random fails，像是網路突然不穩，或是套件安裝因爲不明原因失敗等等，像下面這樣：</p>
-<p><img src="/img/workflow-failed.png" alt="deploy 階段錯誤"></p>
+<p><img src="/murmur/img/workflow-failed.png" alt="deploy 階段錯誤"></p>
 <p>仔細檢查會發現是 deploy 階段在 ssh connect 到 server 的過程中 timeout 了，這可能是 server 那邊設定出了點問題，通常這種情況只要進到 server 改好設定，重跑一次 CI 就可以解決，不過如果只是 deploy 階段出錯，重跑還需要重新設定環境、裝套件、跑完測試後才可以 deploy，實在太沒效率了，所以在 workflow 中，很貼心的讓你可以選擇只跑失敗的 jobs，進一步的節省時間。</p>
-<p><img src="/img/workflow-rerun-failed.png" alt="only rerun failed jobs"></p>
+<p><img src="/murmur/img/workflow-rerun-failed.png" alt="only rerun failed jobs"></p>
 <h2 id="善用-cache">善用 Cache</h2>
 <p>在 workflow 中，每個 job 都是運作在一個獨立的 container 當中，爲了確保每個 job 可以獨立運行，所以可能會需要前一次 CI 或是前一個 job 產生的一些資料，這時候 cache 就派上用場了。</p>
 <p>舉例來說，像是在 bundle_dependencies 階段會安裝所需要的套件，但是我們並不想要每次跑 CI 的時候都重裝全部的套件，只想要裝之前沒裝過的；又或者是在 run_unit_test階段時，會需要用到在 bundle_dependencies階段裝好的整包套件資料，那這時候我們就可以在 bundle_dependencies階段，把 bundle install 所產生的資料儲存成 cache，等到下一個 job 或是下一次 CI要使用的時候，再用 cache key 把存的資料取出來用。</p>

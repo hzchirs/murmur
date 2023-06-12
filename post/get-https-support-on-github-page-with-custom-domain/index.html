@@ -148,7 +148,7 @@ $ dig blog.hzchris.space &#43;noall &#43;answer sni.github.map.fastly.net. 735	I
   <div class="relative z-50 mr-auto flex items-center">
     <a
       class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
-      href="https://hzchirs.github.io/"
+      href="https://hzchirs.github.io/murmur/"
       >HzChris</a
     >
     <div
@@ -244,7 +244,7 @@ $ dig blog.hzchris.space &#43;noall &#43;answer sni.github.map.fastly.net. 735	I
 <p>直到不久前看到 Github Page 也開始<a href="https://blog.github.com/2018-05-01-github-pages-custom-domains-https/">支援自訂網域的 Https</a> ，就花了點時間把部落格從 Gitlab 遷移到 Github 了。</p>
 <h2 id="設定步驟">設定步驟</h2>
 <p>首先，到網域供應商那邊(我的是<a href="https://www.gandi.net/en">gandi</a>) 把 CNAME 對應到個人的 github 頂層網域，我的 github 帳號是 hzchirs，所以頂層網域就是 <code>hzchirs.github.io</code>，而我希望把子網域 <code>blog.hzchris.space</code> 對應到 Github Page，所以設定會像這樣：</p>
-<p><img src="/img/cname.png" alt="CNAME 設定"></p>
+<p><img src="/murmur/img/cname.png" alt="CNAME 設定"></p>
 <p><strong>注意:</strong> Hostname 欄位的 <code>username.github.io.</code> 最後面有個點，不要漏掉了。</p>
 <p>當設定完成之後，要<strong>數小時至一天</strong>才會生效，如果想要確定是否生效，可以使用 <code>dig</code> 來查詢，生效的自訂網域與 github.io 都應該指向同一個 IP：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zsh" data-lang="zsh"><span style="display:flex;"><span>$ dig blog.hzchris.space +noall +answer
@@ -265,7 +265,7 @@ $ dig blog.hzchris.space &#43;noall &#43;answer sni.github.map.fastly.net. 735	I
 <p><code>Your site is published at https://your.custom.url</code></p>
 </blockquote>
 <p>有的話就大功告成啦。最後設定那邊應該會像下面這樣：</p>
-<p><img src="/img/github-page-setting.png" alt="Github Page 設定"></p>
+<p><img src="/murmur/img/github-page-setting.png" alt="Github Page 設定"></p>
 <p>這邊要注意一件事，如果 repository 原本就已經有設定 custom domain 的話，需要先清掉再重新輸入一次，才能讓 HTTPS 成功運作。</p>
 <p>Github Page 這次的更新其實不止是支援 HTTPS，同時還可以享有 CDN，因此遷移之後速度變快非常有感，只是官方的文件寫的不是非常清楚，多繞了一點路，如果在設定上遇到問題的話，也歡迎留言討論😃。</p>
 </section>

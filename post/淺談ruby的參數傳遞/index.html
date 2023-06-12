@@ -144,7 +144,7 @@
   <div class="relative z-50 mr-auto flex items-center">
     <a
       class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
-      href="https://hzchirs.github.io/"
+      href="https://hzchirs.github.io/murmur/"
       >HzChris</a
     >
     <div
@@ -292,7 +292,7 @@
 </span></span><span style="display:flex;"><span>greeting(str)
 </span></span><span style="display:flex;"><span>p str <span style="color:#75715e">#=&gt; &#34;Hello, World&#34;</span>
 </span></span></code></pre></div><p>輸出來的結果如下：(object_id 會依電腦而不同)
-<img src="/img/call-by-address.png" alt="call-by-address"></p>
+<img src="/murmur/img/call-by-address.png" alt="call-by-address"></p>
 <p>由此可知一開始 <code>string</code> 與 <code>str</code> 皆指向 <code>Hello, </code>，直到 <code>string = &quot;You can't see this&quot;</code> 時才改變了 <code>string</code> 所指的位址；
 所以在 ruby 中，當我們要把參數傳進一個方法時，所傳進去的其實是那個參數的值的 <strong>位址</strong>。</p>
 <hr>
