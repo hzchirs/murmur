@@ -1,63 +1,248 @@
 <!DOCTYPE html>
-<html lang="zh-tw">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta content="" name="keywords">
-<meta content="如何在 PostgreSQL 中找出連續日期 - HzChris" property="og:title">
-<title>如何在 PostgreSQL 中找出連續日期 | HzChris</title>
-<link rel="stylesheet" href="https://hzchirs.github.io/murmur//css/style.css">
-<link rel="stylesheet" href="https://hzchirs.github.io/murmur//css/custom.css">
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
 
 
-<body>
-<header>
-  <section class="section">
-    <div class="container">
-      <nav class="nav">
-        <div class="nav-left">
-          <a class="nav-item" href="https://hzchirs.github.io/murmur/"><h1 class="title is-4">HzChris</h1></a>
-        </div>
-        <div class="nav-right">
-          <nav class="nav-item level is-mobile">
-            
-            <a class="level-item" href="https://github.com/hzchirs">
-              <span class="icon">
-                <i class="fa fa-github"></i>
-              </span>
-            </a>
-            
-            <a class="level-item" href="https://www.facebook.com/hzchirs">
-              <span class="icon">
-                <i class="fa fa-facebook-square"></i>
-              </span>
-            </a>
-            
-          </nav>
-        </div>
-      </nav>
-    </div>
-  </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready text-sm lg:text-base"
+  style="--bg: #fbfbfb"
+  lang="zh-tw"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>如何在 PostgreSQL 中找出連續日期 - HzChris</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  <meta name="description" content="工作上需要從資料庫找出使用者連續上站天數，
+找了一些相關的資源，其實解法相當多，但大多都是 SQL Server 的解法，
+從中找了一個比較[簡單優雅的]
+(https://stackoverflow.com/questions/20402089/detect-consecutive-dates-ranges-using-sql)
+來研究，並修改成 PostgreSQL 的版本。
+在接下來的說明中，會產生一個最簡單，單純只有時間序列的 table，並用這個 table 來
+一步步說明實現方式。" />
+  <meta name="author" content="HzChris" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://blog.hzchris.space/main.min.css" />
+
+  
+  <script
+    defer
+    src="https://blog.hzchris.space/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+   
+  <link rel="preload" as="image" href="https://blog.hzchris.space/theme.png" />
+
+  
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <link rel="icon" href="https://blog.hzchris.space/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://blog.hzchris.space/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.112.5">
+
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  <meta property="og:title" content="如何在 PostgreSQL 中找出連續日期" />
+<meta property="og:description" content="工作上需要從資料庫找出使用者連續上站天數，
+找了一些相關的資源，其實解法相當多，但大多都是 SQL Server 的解法，
+從中找了一個比較[簡單優雅的]
+(https://stackoverflow.com/questions/20402089/detect-consecutive-dates-ranges-using-sql)
+來研究，並修改成 PostgreSQL 的版本。
+在接下來的說明中，會產生一個最簡單，單純只有時間序列的 table，並用這個 table 來
+一步步說明實現方式。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.hzchris.space/post/how-to-find-consecutive-dates-in-postgresql/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2018-05-12T22:07:56+08:00" />
+<meta property="article:modified_time" content="2018-05-12T22:07:56+08:00" /><meta property="og:site_name" content="HzChris" />
+
+  
+  <meta itemprop="name" content="如何在 PostgreSQL 中找出連續日期">
+<meta itemprop="description" content="工作上需要從資料庫找出使用者連續上站天數，
+找了一些相關的資源，其實解法相當多，但大多都是 SQL Server 的解法，
+從中找了一個比較[簡單優雅的]
+(https://stackoverflow.com/questions/20402089/detect-consecutive-dates-ranges-using-sql)
+來研究，並修改成 PostgreSQL 的版本。
+在接下來的說明中，會產生一個最簡單，單純只有時間序列的 table，並用這個 table 來
+一步步說明實現方式。"><meta itemprop="datePublished" content="2018-05-12T22:07:56+08:00" />
+<meta itemprop="dateModified" content="2018-05-12T22:07:56+08:00" />
+<meta itemprop="wordCount" content="392">
+<meta itemprop="keywords" content="Database,SQL," />
+  
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="如何在 PostgreSQL 中找出連續日期"/>
+<meta name="twitter:description" content="工作上需要從資料庫找出使用者連續上站天數，
+找了一些相關的資源，其實解法相當多，但大多都是 SQL Server 的解法，
+從中找了一個比較[簡單優雅的]
+(https://stackoverflow.com/questions/20402089/detect-consecutive-dates-ranges-using-sql)
+來研究，並修改成 PostgreSQL 的版本。
+在接下來的說明中，會產生一個最簡單，單純只有時間序列的 table，並用這個 table 來
+一步步說明實現方式。"/>
+
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-0.5 text-3xl font-bold"
+      href="https://blog.hzchris.space/"
+      >HzChris</a
+    >
+    <div
+      class="btn-dark text-[0] ml-6 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = `"#fbfbfb"`.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+
+    
+  </div>
 </header>
 
-<section class="section">
-  <div class="container">
-    <h2 class="subtitle is-6">May 12, 2018</h2>
-    <h1 class="title">如何在 PostgreSQL 中找出連續日期</h1>
-    
-      <div class="tags">
-    
-        <a class="button is-link" href="/murmur/tags/database">Database</a>
-    
-        <a class="button is-link" href="/murmur/tags/sql">SQL</a>
-    
-</div>
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-10rem)] max-w-3xl px-8 pb-24 pt-16 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-20">
+    <h1 class="!my-0 pb-2.5">如何在 PostgreSQL 中找出連續日期</h1>
 
     
-    <div class="content">
-      <p>工作上需要從資料庫找出使用者連續上站天數，
+    <div class="text-sm opacity-60">
+      
+      <time>May 12, 2018</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><p>工作上需要從資料庫找出使用者連續上站天數，
 找了一些相關的資源，其實解法相當多，但大多都是 SQL Server 的解法，
 從中找了一個比較[簡單優雅的]
 (<a href="https://stackoverflow.com/questions/20402089/detect-consecutive-dates-ranges-using-sql">https://stackoverflow.com/questions/20402089/detect-consecutive-dates-ranges-using-sql</a>)
@@ -66,19 +251,19 @@
 一步步說明實現方式。</p>
 <h2 id="問題描述">問題描述</h2>
 <p>假如我們的 table 叫做 <code>user_visits</code>， 裡面只有 <code>date</code> 欄位，記錄使用者上站日期：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> user_visits <span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> date;
-</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">| date       |
-| ---------- |
-| 2018-01-01 |
-| 2018-01-02 |
-| 2018-01-03 |
-| 2018-02-10 |
-| 2018-02-11 |
-| 2018-02-12 |
-| 2018-02-13 |
-| 2018-03-21 |
-| 2018-03-22 |
-</code></pre></div><p>我們想要知道使用者的每一次連續上站區間，且希望最終產生的結果如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> user_visits <span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> date;
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span>| date       |
+</span></span><span style="display:flex;"><span>| ---------- |
+</span></span><span style="display:flex;"><span>| 2018-01-01 |
+</span></span><span style="display:flex;"><span>| 2018-01-02 |
+</span></span><span style="display:flex;"><span>| 2018-01-03 |
+</span></span><span style="display:flex;"><span>| 2018-02-10 |
+</span></span><span style="display:flex;"><span>| 2018-02-11 |
+</span></span><span style="display:flex;"><span>| 2018-02-12 |
+</span></span><span style="display:flex;"><span>| 2018-02-13 |
+</span></span><span style="display:flex;"><span>| 2018-03-21 |
+</span></span><span style="display:flex;"><span>| 2018-03-22 |
+</span></span></code></pre></div><p>我們想要知道使用者的每一次連續上站區間，且希望最終產生的結果如下：</p>
 <table>
 <thead>
 <tr>
@@ -111,77 +296,75 @@
 而連續的，不可分割的部分則稱作 Island (也就是一組)。</p>
 </blockquote>
 <p>因此我們可以將日期連續的 row 視為同一組，而不同組之間會有 Gap：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">| date       |
-| ---------- |
-| 2018-01-01 |
-| 2018-01-02 |
-| 2018-01-03 |
-               &lt;<span style="color:#f92672">--</span> <span style="color:#a6e22e">Gap</span>
-<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#a6e22e">2018-02-10</span> <span style="color:#960050;background-color:#1e0010">|</span>
-<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#a6e22e">2018-02-11</span> <span style="color:#960050;background-color:#1e0010">|</span>
-<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#a6e22e">2018-02-12</span> <span style="color:#960050;background-color:#1e0010">|</span>
-<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#a6e22e">2018-02-13</span> <span style="color:#960050;background-color:#1e0010">|</span>
-               <span style="color:#960050;background-color:#1e0010">&lt;</span><span style="color:#a6e22e">--</span> <span style="color:#a6e22e">Gap</span>
-<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#a6e22e">2018-03-21</span> <span style="color:#960050;background-color:#1e0010">|</span>
-<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#a6e22e">2018-03-22</span> <span style="color:#960050;background-color:#1e0010">|</span>
-</code></pre></div><p>而至於該如何辨識出 Gap ，這就是就是問題的重點啦！
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span>| date       |
+</span></span><span style="display:flex;"><span>| ---------- |
+</span></span><span style="display:flex;"><span>| 2018-01-01 |
+</span></span><span style="display:flex;"><span>| 2018-01-02 |
+</span></span><span style="display:flex;"><span>| 2018-01-03 |
+</span></span><span style="display:flex;"><span>==================&gt; Gap
+</span></span><span style="display:flex;"><span>| 2018-02-10 |
+</span></span><span style="display:flex;"><span>| 2018-02-11 |
+</span></span><span style="display:flex;"><span>| 2018-02-12 |
+</span></span><span style="display:flex;"><span>| 2018-02-13 |
+</span></span><span style="display:flex;"><span>==================&gt; Gap
+</span></span><span style="display:flex;"><span>| 2018-03-21 |
+</span></span><span style="display:flex;"><span>| 2018-03-22 |
+</span></span></code></pre></div><p>而至於該如何辨識出 Gap ，這就是就是問題的重點啦！
 我們先用 <code>ROW_NUMBER()</code> 這個 <a href="https://www.postgresql.org/docs/9.6/static/functions-window.html">Window
 Function</a> 在
 date 旁加上一個連續的數字欄位：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> date, ROW_NUMBER() OVER(<span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> date) <span style="color:#66d9ef">AS</span> row_number
-<span style="color:#66d9ef">FROM</span> user_visits;
-</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">| date       | row_number |
-| ---------- | ---------- |
-| 2018-01-01 | 1          |
-| 2018-01-02 | 2          |
-| 2018-01-03 | 3          |
-                            &lt;<span style="color:#f92672">--</span> <span style="color:#a6e22e">Gap</span>
-<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#a6e22e">2018-02-10</span> <span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#a6e22e">4</span>          <span style="color:#960050;background-color:#1e0010">|</span>
-<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#a6e22e">2018-02-11</span> <span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#a6e22e">5</span>          <span style="color:#960050;background-color:#1e0010">|</span>
-<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#a6e22e">2018-02-12</span> <span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#a6e22e">6</span>          <span style="color:#960050;background-color:#1e0010">|</span>
-<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#a6e22e">2018-02-13</span> <span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#a6e22e">7</span>          <span style="color:#960050;background-color:#1e0010">|</span>
-                            <span style="color:#960050;background-color:#1e0010">&lt;</span><span style="color:#a6e22e">--</span> <span style="color:#a6e22e">Gap</span>
-<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#a6e22e">2018-03-21</span> <span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#a6e22e">8</span>          <span style="color:#960050;background-color:#1e0010">|</span>
-<span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#a6e22e">2018-03-22</span> <span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#a6e22e">9</span>          <span style="color:#960050;background-color:#1e0010">|</span>
-
-</code></pre></div><p>我們可以發現，不論 <code>date</code> 有沒有遇到 Gap，<code>row_number</code> 都是連續的。
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> date, ROW_NUMBER() OVER(<span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> date) <span style="color:#66d9ef">AS</span> row_number
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> user_visits;
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span>| date       | row_number |
+</span></span><span style="display:flex;"><span>| ---------- | ---------- |
+</span></span><span style="display:flex;"><span>| 2018-01-01 | 1          |
+</span></span><span style="display:flex;"><span>| 2018-01-02 | 2          |
+</span></span><span style="display:flex;"><span>| 2018-01-03 | 3          |
+</span></span><span style="display:flex;"><span>===============================&gt; Gap
+</span></span><span style="display:flex;"><span>| 2018-02-10 | 4          |
+</span></span><span style="display:flex;"><span>| 2018-02-11 | 5          |
+</span></span><span style="display:flex;"><span>| 2018-02-12 | 6          |
+</span></span><span style="display:flex;"><span>| 2018-02-13 | 7          |
+</span></span><span style="display:flex;"><span>===============================&gt; Gap
+</span></span><span style="display:flex;"><span>| 2018-03-21 | 8          |
+</span></span><span style="display:flex;"><span>| 2018-03-22 | 9          |
+</span></span></code></pre></div><p>我們可以發現，不論 <code>date</code> 有沒有遇到 Gap，<code>row_number</code> 都是連續的。
 再來把 <code>date</code> 和 <code>row_number</code> 相減看看：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> date, 
-  ROW_NUMBER() OVER(<span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> date) <span style="color:#66d9ef">AS</span> row_number,
-  date <span style="color:#f92672">-</span> (ROW_NUMBER() OVER(<span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> date))::integer <span style="color:#66d9ef">AS</span> diff
-<span style="color:#66d9ef">FROM</span> user_visits;
-</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">| date       | row_number | diff       |
-| ---------- | ---------- | ---------- |
-| 2018-01-01 | 1          | 2017-12-31 |
-| 2018-01-02 | 2          | 2017-12-31 |
-| 2018-01-03 | 3          | 2017-12-31 |
-
-| 2018-02-10 | 4          | 2018-02-06 |
-| 2018-02-11 | 5          | 2018-02-06 |
-| 2018-02-12 | 6          | 2018-02-06 |
-| 2018-02-13 | 7          | 2018-02-06 |
-
-| 2018-03-21 | 8          | 2018-03-13 |
-| 2018-03-22 | 9          | 2018-03-13 |
-
-</code></pre></div><p>到這一步，可以發現 <code>row_number</code> 的用意了吧？
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> date,
+</span></span><span style="display:flex;"><span>  ROW_NUMBER() OVER(<span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> date) <span style="color:#66d9ef">AS</span> row_number,
+</span></span><span style="display:flex;"><span>  date <span style="color:#f92672">-</span> (ROW_NUMBER() OVER(<span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> date))::integer <span style="color:#66d9ef">AS</span> diff
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> user_visits;
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span>| date       | row_number | diff       |
+</span></span><span style="display:flex;"><span>| ---------- | ---------- | ---------- |
+</span></span><span style="display:flex;"><span>| 2018-01-01 | 1          | 2017-12-31 |
+</span></span><span style="display:flex;"><span>| 2018-01-02 | 2          | 2017-12-31 |
+</span></span><span style="display:flex;"><span>| 2018-01-03 | 3          | 2017-12-31 |
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>| 2018-02-10 | 4          | 2018-02-06 |
+</span></span><span style="display:flex;"><span>| 2018-02-11 | 5          | 2018-02-06 |
+</span></span><span style="display:flex;"><span>| 2018-02-12 | 6          | 2018-02-06 |
+</span></span><span style="display:flex;"><span>| 2018-02-13 | 7          | 2018-02-06 |
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>| 2018-03-21 | 8          | 2018-03-13 |
+</span></span><span style="display:flex;"><span>| 2018-03-22 | 9          | 2018-03-13 |
+</span></span></code></pre></div><p>到這一步，可以發現 <code>row_number</code> 的用意了吧？
 如果 <code>date</code> 是連續的，<code>row_number</code> 也是連續的，
 那麼 <code>date - row_number</code> (也就是 <code>diff</code>) 產生的值就應該相同，而中間只要遇到 Gap，下一個 <code>diff</code> 的結果就會不同。</p>
 <p><code>date - row_number</code> 所產生出來的 <code>diff</code> 欄位並沒有任何資料上的意義，
 只是用來輔助判斷 <code>date</code> 是不是在同一個組別。</p>
 <p>因此我們可以判斷，只要 <code>diff</code> 的值相同的資料，都是同一個連續日期的 Group。
 到這一步，要產生最後的結果就很簡單了，讓我們來完成它吧！</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">WITH</span> t <span style="color:#66d9ef">AS</span> (
-  <span style="color:#66d9ef">SELECT</span> date, 
-    ROW_NUMBER() OVER(<span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> date) <span style="color:#66d9ef">AS</span> row_number,
-    date <span style="color:#f92672">-</span> (ROW_NUMBER() OVER(<span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> date))::integer <span style="color:#66d9ef">AS</span> diff
-  <span style="color:#66d9ef">FROM</span> user_visits;
-)
-
-<span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">MIN</span>(date), <span style="color:#66d9ef">MAX</span>(date), (<span style="color:#66d9ef">MAX</span>(date) <span style="color:#f92672">-</span> <span style="color:#66d9ef">MIN</span>(date) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">AS</span> <span style="color:#960050;background-color:#1e0010">連續上站天數</span>
-<span style="color:#66d9ef">FROM</span> t 
-<span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span> diff
-</code></pre></div><table>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">WITH</span> t <span style="color:#66d9ef">AS</span> (
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">SELECT</span> date,
+</span></span><span style="display:flex;"><span>    ROW_NUMBER() OVER(<span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> date) <span style="color:#66d9ef">AS</span> row_number,
+</span></span><span style="display:flex;"><span>    date <span style="color:#f92672">-</span> (ROW_NUMBER() OVER(<span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> date))::integer <span style="color:#66d9ef">AS</span> diff
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">FROM</span> user_visits;
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">MIN</span>(date), <span style="color:#66d9ef">MAX</span>(date), (<span style="color:#66d9ef">MAX</span>(date) <span style="color:#f92672">-</span> <span style="color:#66d9ef">MIN</span>(date) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">AS</span> <span style="color:#960050;background-color:#1e0010">連續上站天數</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> t
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span> diff
+</span></span></code></pre></div><table>
 <thead>
 <tr>
 <th>min</th>
@@ -206,41 +389,76 @@ date 旁加上一個連續的數字欄位：</p>
 <td>2</td>
 </tr>
 </tbody>
-</table>
-    </div>
+</table></section>
+
+  
+  
+  <footer class="mt-12 flex flex-wrap">
+     
+    <a
+      class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-2 no-underline dark:bg-white/[8%]"
+      href="https://blog.hzchris.space/tags/database"
+      >Database</a
+    >
+     
+    <a
+      class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-2 no-underline dark:bg-white/[8%]"
+      href="https://blog.hzchris.space/tags/sql"
+      >SQL</a
+    >
+    
+  </footer>
+  
+
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    <a
+      class="flex w-1/2 items-center rounded-l-md p-6 pr-3 no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://blog.hzchris.space/post/get-https-support-on-github-page-with-custom-domain/"
+      ><span class="mr-1.5">←</span><span>讓自訂網域的 Github Page 支援 HTTPS</span></a
+    >
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://blog.hzchris.space/post/unboxing-hhkb-layout-xd60-with-maxkey-ashen-and-xda-pbt-the-max/"
+      ><span>HHKB layout 的客制鍵盤 &#43; Maxkey 灰階 &#43; XDA 球帽開箱</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+
+  
+  
+
+  
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2023
+    <a class="link" href="https://blog.hzchris.space">HzChris</a>
   </div>
-</section>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >Theme Paper</a
+  >
+</footer>
 
-
-<section class="section">
-  <div class="container has-text-centered">
-    <p>Copyright © 2023 by HzChris</p>
-  </div>
-</section>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
-
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/languages/ruby.min.js"></script>
-
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/languages/javascript.min.js"></script>
-
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/languages/vim.min.js"></script>
-
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/languages/shell-session.min.js"></script>
-
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/languages/bash.min.js"></script>
-
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/languages/zsh.min.js"></script>
-
-<script>hljs.initHighlightingOnLoad();</script>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-103426647-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
-
-</body>
+  </body>
+</html>

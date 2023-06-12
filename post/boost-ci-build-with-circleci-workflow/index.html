@@ -1,63 +1,236 @@
 <!DOCTYPE html>
-<html lang="zh-tw">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta content="" name="keywords">
-<meta content="CiricleCI Workflow: 讓 build 時間減少 50% 的設定心得 - HzChris" property="og:title">
-<title>CiricleCI Workflow: 讓 build 時間減少 50% 的設定心得 | HzChris</title>
-<link rel="stylesheet" href="https://hzchirs.github.io/murmur//css/style.css">
-<link rel="stylesheet" href="https://hzchirs.github.io/murmur//css/custom.css">
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
 
 
-<body>
-<header>
-  <section class="section">
-    <div class="container">
-      <nav class="nav">
-        <div class="nav-left">
-          <a class="nav-item" href="https://hzchirs.github.io/murmur/"><h1 class="title is-4">HzChris</h1></a>
-        </div>
-        <div class="nav-right">
-          <nav class="nav-item level is-mobile">
-            
-            <a class="level-item" href="https://github.com/hzchirs">
-              <span class="icon">
-                <i class="fa fa-github"></i>
-              </span>
-            </a>
-            
-            <a class="level-item" href="https://www.facebook.com/hzchirs">
-              <span class="icon">
-                <i class="fa fa-facebook-square"></i>
-              </span>
-            </a>
-            
-          </nav>
-        </div>
-      </nav>
-    </div>
-  </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready text-sm lg:text-base"
+  style="--bg: #fbfbfb"
+  lang="zh-tw"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>CiricleCI Workflow: 讓 build 時間減少 50% 的設定心得 - HzChris</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  <meta name="description" content="財報狗用 CircleCI 有一段時間了，一開始用的時候還是 1.0， 2.0 還在 beta 階段。我們的專案在 1.0 上面一直運作良好，所以也沒有想說要換，直到 CircleCI 發佈 2018/8/31 之後將不再支援 1.0，我們才開始考慮要遷移專案 XD，順便趁着這次 的遷移導入的 2.0 的新功能: workflow。
+Workflow 簡介 CircleCI 在 2.0 中推出了 workflow 這個新功能，官網的介紹如下：
+A workflow is a set of rules for defining a collection of jobs and their run order. Workflows support complex job orchestration using a simple set of configuration keys to help you resolve failures sooner.
+簡單來說，workflow 提供了一種做法，讓你可以把 CI 的每個步驟拆分成一個個獨立的 jobs，jobs 之間遵照一定的執行順序或是並行，萬一發生失敗，只要針對失敗的 job 去做處理就好了，大大提升反應速度。" />
+  <meta name="author" content="HzChris" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://blog.hzchris.space/main.min.css" />
+
+  
+  <script
+    defer
+    src="https://blog.hzchris.space/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+   
+  <link rel="preload" as="image" href="https://blog.hzchris.space/theme.png" />
+
+  
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <link rel="icon" href="https://blog.hzchris.space/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://blog.hzchris.space/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.112.5">
+
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  <meta property="og:title" content="CiricleCI Workflow: 讓 build 時間減少 50% 的設定心得" />
+<meta property="og:description" content="財報狗用 CircleCI 有一段時間了，一開始用的時候還是 1.0， 2.0 還在 beta 階段。我們的專案在 1.0 上面一直運作良好，所以也沒有想說要換，直到 CircleCI 發佈 2018/8/31 之後將不再支援 1.0，我們才開始考慮要遷移專案 XD，順便趁着這次 的遷移導入的 2.0 的新功能: workflow。
+Workflow 簡介 CircleCI 在 2.0 中推出了 workflow 這個新功能，官網的介紹如下：
+A workflow is a set of rules for defining a collection of jobs and their run order. Workflows support complex job orchestration using a simple set of configuration keys to help you resolve failures sooner.
+簡單來說，workflow 提供了一種做法，讓你可以把 CI 的每個步驟拆分成一個個獨立的 jobs，jobs 之間遵照一定的執行順序或是並行，萬一發生失敗，只要針對失敗的 job 去做處理就好了，大大提升反應速度。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.hzchris.space/post/boost-ci-build-with-circleci-workflow/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2018-06-16T11:43:14+08:00" />
+<meta property="article:modified_time" content="2018-06-16T11:43:14+08:00" /><meta property="og:site_name" content="HzChris" />
+
+  
+  <meta itemprop="name" content="CiricleCI Workflow: 讓 build 時間減少 50% 的設定心得">
+<meta itemprop="description" content="財報狗用 CircleCI 有一段時間了，一開始用的時候還是 1.0， 2.0 還在 beta 階段。我們的專案在 1.0 上面一直運作良好，所以也沒有想說要換，直到 CircleCI 發佈 2018/8/31 之後將不再支援 1.0，我們才開始考慮要遷移專案 XD，順便趁着這次 的遷移導入的 2.0 的新功能: workflow。
+Workflow 簡介 CircleCI 在 2.0 中推出了 workflow 這個新功能，官網的介紹如下：
+A workflow is a set of rules for defining a collection of jobs and their run order. Workflows support complex job orchestration using a simple set of configuration keys to help you resolve failures sooner.
+簡單來說，workflow 提供了一種做法，讓你可以把 CI 的每個步驟拆分成一個個獨立的 jobs，jobs 之間遵照一定的執行順序或是並行，萬一發生失敗，只要針對失敗的 job 去做處理就好了，大大提升反應速度。"><meta itemprop="datePublished" content="2018-06-16T11:43:14+08:00" />
+<meta itemprop="dateModified" content="2018-06-16T11:43:14+08:00" />
+<meta itemprop="wordCount" content="362">
+<meta itemprop="keywords" content="CI,Workflow," />
+  
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="CiricleCI Workflow: 讓 build 時間減少 50% 的設定心得"/>
+<meta name="twitter:description" content="財報狗用 CircleCI 有一段時間了，一開始用的時候還是 1.0， 2.0 還在 beta 階段。我們的專案在 1.0 上面一直運作良好，所以也沒有想說要換，直到 CircleCI 發佈 2018/8/31 之後將不再支援 1.0，我們才開始考慮要遷移專案 XD，順便趁着這次 的遷移導入的 2.0 的新功能: workflow。
+Workflow 簡介 CircleCI 在 2.0 中推出了 workflow 這個新功能，官網的介紹如下：
+A workflow is a set of rules for defining a collection of jobs and their run order. Workflows support complex job orchestration using a simple set of configuration keys to help you resolve failures sooner.
+簡單來說，workflow 提供了一種做法，讓你可以把 CI 的每個步驟拆分成一個個獨立的 jobs，jobs 之間遵照一定的執行順序或是並行，萬一發生失敗，只要針對失敗的 job 去做處理就好了，大大提升反應速度。"/>
+
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-0.5 text-3xl font-bold"
+      href="https://blog.hzchris.space/"
+      >HzChris</a
+    >
+    <div
+      class="btn-dark text-[0] ml-6 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = `"#fbfbfb"`.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+
+    
+  </div>
 </header>
 
-<section class="section">
-  <div class="container">
-    <h2 class="subtitle is-6">June 16, 2018</h2>
-    <h1 class="title">CiricleCI Workflow: 讓 build 時間減少 50% 的設定心得</h1>
-    
-      <div class="tags">
-    
-        <a class="button is-link" href="/murmur/tags/ci">CI</a>
-    
-        <a class="button is-link" href="/murmur/tags/workflow">Workflow</a>
-    
-</div>
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-10rem)] max-w-3xl px-8 pb-24 pt-16 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-20">
+    <h1 class="!my-0 pb-2.5">CiricleCI Workflow: 讓 build 時間減少 50% 的設定心得</h1>
 
     
-    <div class="content">
-      <p><img src="https://cdn-images-1.medium.com/max/2000/1*ZHsy56SNDn4lLwajoKyeAA.jpeg" alt="fly-to-the-moon"></p>
+    <div class="text-sm opacity-60">
+      
+      <time>Jun 16, 2018</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><p><img src="https://cdn-images-1.medium.com/max/2000/1*ZHsy56SNDn4lLwajoKyeAA.jpeg" alt="fly-to-the-moon"></p>
 <p><a href="https://statementdog.com/">財報狗</a>用 CircleCI 有一段時間了，一開始用的時候還是 1.0，
 2.0 還在 beta 階段。我們的專案在 1.0 上面一直運作良好，所以也沒有想說要換，直到
 CircleCI 發佈 2018/8/31 之後將不再支援 1.0，我們才開始考慮要遷移專案 XD，順便趁着這次
@@ -101,29 +274,29 @@ CircleCI 發佈 2018/8/31 之後將不再支援 1.0，我們才開始考慮要�
 <p>每次都循序跑實在有點沒效率，以上面的流程來說， <code>bundle_dependencies</code>、
 <code>yarn_dependencies</code> 可以在 <code>checkout_code</code> 結束之後同時執行； <code>run_unit_test</code> 以及
 <code>run_integration_test</code> 則是在 dependencies 安裝結束之後就可以並行，這也就是 workflow 最主要的功能，在 CI 中只要定義好每一個 job ，就可以很輕易的設定好 workflow：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#e6db74">workflows</span>:
-  <span style="color:#e6db74">version</span>: <span style="color:#ae81ff">2</span>
-  <span style="color:#e6db74">build_and_test</span>: <span style="color:#75715e"># Workflow 的名稱</span>
-    <span style="color:#e6db74">jobs</span>:
-      <span style="color:#f92672">-</span> checkout_code
-      <span style="color:#f92672">-</span> <span style="color:#e6db74">bundle_dependencies</span>:
-          <span style="color:#e6db74">requires</span>: <span style="color:#75715e"># 相依於哪些 jobs</span>
-            <span style="color:#f92672">-</span> checkout_code
-      <span style="color:#f92672">-</span> <span style="color:#e6db74">yarn_dependencies</span>:
-          <span style="color:#e6db74">requires</span>:
-            <span style="color:#f92672">-</span> checkout_code
-      <span style="color:#f92672">-</span> <span style="color:#e6db74">run_unit_tests</span>:
-          <span style="color:#e6db74">requires</span>:
-            <span style="color:#f92672">-</span> bundle_dependencies
-      <span style="color:#f92672">-</span> <span style="color:#e6db74">run_integration_tests</span>:
-          <span style="color:#e6db74">requires</span>:
-            <span style="color:#f92672">-</span> yarn_dependencies
-            <span style="color:#f92672">-</span> bundle_dependencies
-      <span style="color:#f92672">-</span> <span style="color:#e6db74">deploy</span>:
-          <span style="color:#e6db74">requires</span>:
-            <span style="color:#f92672">-</span> run_unit_tests
-            <span style="color:#f92672">-</span> run_integration_tests
-</code></pre></div><p>設定好之後，CircleCI 就會自動以 workflow 的方式執行：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#e6db74">workflows</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">version</span>: <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">build_and_test</span>: <span style="color:#75715e"># Workflow 的名稱</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">jobs</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">-</span> checkout_code
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">-</span> <span style="color:#e6db74">bundle_dependencies</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#e6db74">requires</span>: <span style="color:#75715e"># 相依於哪些 jobs</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">-</span> checkout_code
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">-</span> <span style="color:#e6db74">yarn_dependencies</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#e6db74">requires</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">-</span> checkout_code
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">-</span> <span style="color:#e6db74">run_unit_tests</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#e6db74">requires</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">-</span> bundle_dependencies
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">-</span> <span style="color:#e6db74">run_integration_tests</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#e6db74">requires</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">-</span> yarn_dependencies
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">-</span> bundle_dependencies
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">-</span> <span style="color:#e6db74">deploy</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#e6db74">requires</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">-</span> run_unit_tests
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">-</span> run_integration_tests
+</span></span></code></pre></div><p>設定好之後，CircleCI 就會自動以 workflow 的方式執行：</p>
 <p><img src="/img/workflow.png" alt="workflow"></p>
 <p>紅色框框圈起來的是並行執行的部分，可以看到最花時間的 <code>run_unit_test</code> 以及 <code>run_integration_test</code> 因爲並行的關係，只花了 6 分鐘就跑完了，而整個 CI 的時間則足足從 16 分鐘縮短到 7 分多鐘，速度變快超有感的阿！</p>
 <h2 id="重跑-workflow-失敗的-jobs">重跑 workflow 失敗的 jobs</h2>
@@ -136,16 +309,16 @@ CircleCI 發佈 2018/8/31 之後將不再支援 1.0，我們才開始考慮要�
 <p>在 workflow 中，每個 job 都是運作在一個獨立的 container 當中，爲了確保每個 job 可以獨立運行，所以可能會需要前一次 CI 或是前一個 job 產生的一些資料，這時候 cache 就派上用場了。</p>
 <p>舉例來說，像是在 bundle_dependencies 階段會安裝所需要的套件，但是我們並不想要每次跑 CI 的時候都重裝全部的套件，只想要裝之前沒裝過的；又或者是在 run_unit_test階段時，會需要用到在 bundle_dependencies階段裝好的整包套件資料，那這時候我們就可以在 bundle_dependencies階段，把 bundle install 所產生的資料儲存成 cache，等到下一個 job 或是下一次 CI要使用的時候，再用 cache key 把存的資料取出來用。</p>
 <p>以 <code>bundle install</code> 爲例，裝好的 bundle 可以用 <code>save_cache</code> 儲存起來：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#f92672">-</span> <span style="color:#e6db74">save_cache</span>:
-    <span style="color:#e6db74">key</span>: v1<span style="color:#f92672">-</span>gem<span style="color:#f92672">-</span>{{ checksum <span style="color:#e6db74">&#34;Gemfile.lock&#34;</span> }}
-    <span style="color:#e6db74">paths</span>:
-      <span style="color:#f92672">-</span> vendor<span style="color:#f92672">/</span>bundle
-</code></pre></div><p>如果之後的 job 或是 build 需要用到這包裝好的 bundle ，只需要 <code>restore_cache</code> 即可：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#e6db74">restore_cache</span>:
-  <span style="color:#e6db74">keys</span>:
-    <span style="color:#f92672">-</span> v1<span style="color:#f92672">-</span>gem<span style="color:#f92672">-</span>{{ checksum <span style="color:#e6db74">&#34;Gemfile.lock&#34;</span> }}
-    <span style="color:#f92672">-</span> v1<span style="color:#f92672">-</span>gem<span style="color:#f92672">-</span>
-</code></pre></div><p>這邊 CircleCI 給了一個彈性，可以設定多組 key， 萬一使用第一個 key
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#f92672">-</span> <span style="color:#e6db74">save_cache</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">key</span>: v1<span style="color:#f92672">-</span>gem<span style="color:#f92672">-</span>{{ checksum <span style="color:#e6db74">&#34;Gemfile.lock&#34;</span> }}
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">paths</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">-</span> vendor<span style="color:#f92672">/</span>bundle
+</span></span></code></pre></div><p>如果之後的 job 或是 build 需要用到這包裝好的 bundle ，只需要 <code>restore_cache</code> 即可：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#e6db74">restore_cache</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">keys</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">-</span> v1<span style="color:#f92672">-</span>gem<span style="color:#f92672">-</span>{{ checksum <span style="color:#e6db74">&#34;Gemfile.lock&#34;</span> }}
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">-</span> v1<span style="color:#f92672">-</span>gem<span style="color:#f92672">-</span>
+</span></span></code></pre></div><p>這邊 CircleCI 給了一個彈性，可以設定多組 key， 萬一使用第一個 key
 (<code>v1-gem-{{checksum “Gemfile.lock&quot;}}</code>) 找不到符合的結果，就會使用下一個順位，也就是 <code>v1-gem-</code> 這個 key，去比對最近產生，且前綴符合 <code>v1-gem-</code> 的快取資料。</p>
 <h3 id="不要設計太小的-job">不要設計太小的 job</h3>
 <p>由於每個 job 在運作之前仍然需要準備好所需要的環境與資料才能夠運行，即使有做好 cache，取得 cache 的過程中，只要檔案稍大，仍然需要花費 10 - 20 秒的時間，如果是一個 30 秒內就可以執行完的 command，不太建議拉出來成爲一個獨立的 job，反而會拖慢整個 CI 的速度。</p>
@@ -153,41 +326,76 @@ CircleCI 發佈 2018/8/31 之後將不再支援 1.0，我們才開始考慮要�
 <p>還是對 workflow 的設定有些不瞭解的話，可以到我的
 <a href="https://gist.github.com/hzchirs/1040282e5b58df509155613c1d8dbee6">Gist</a> 看詳細的設定
 ，有問題或是有什麼 CI 設定上的建議，也歡迎留言討論 😃。</p>
-
-    </div>
-  </div>
 </section>
 
+  
+  
+  <footer class="mt-12 flex flex-wrap">
+     
+    <a
+      class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-2 no-underline dark:bg-white/[8%]"
+      href="https://blog.hzchris.space/tags/ci"
+      >CI</a
+    >
+     
+    <a
+      class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-2 no-underline dark:bg-white/[8%]"
+      href="https://blog.hzchris.space/tags/workflow"
+      >Workflow</a
+    >
+    
+  </footer>
+  
 
-<section class="section">
-  <div class="container has-text-centered">
-    <p>Copyright © 2023 by HzChris</p>
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    <a
+      class="flex w-1/2 items-center rounded-l-md p-6 pr-3 no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://blog.hzchris.space/post/review-of-finish-give-yourself-the-gift-of-done/"
+      ><span class="mr-1.5">←</span><span>完成: 把不了了之的待辦目標變成以實現的有效練習 - 讀後心得</span></a
+    >
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="https://blog.hzchris.space/post/get-https-support-on-github-page-with-custom-domain/"
+      ><span>讓自訂網域的 Github Page 支援 HTTPS</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+
+  
+  
+
+  
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2023
+    <a class="link" href="https://blog.hzchris.space">HzChris</a>
   </div>
-</section>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >Theme Paper</a
+  >
+</footer>
 
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/languages/ruby.min.js"></script>
-
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/languages/javascript.min.js"></script>
-
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/languages/vim.min.js"></script>
-
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/languages/shell-session.min.js"></script>
-
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/languages/bash.min.js"></script>
-
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/languages/zsh.min.js"></script>
-
-<script>hljs.initHighlightingOnLoad();</script>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-103426647-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
-
-</body>
+  </body>
+</html>
