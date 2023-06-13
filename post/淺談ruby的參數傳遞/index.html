@@ -52,8 +52,7 @@
   <meta name="description" content="以前學計概的時候，知道參數傳遞有分為幾種方式，分別為 call by value，call by reference，以及 call by address
 (其實原本的說法裡沒有call by address，詳情後述)
 那麼，在 Ruby 中，參數是以什麼方式去進行傳遞的呢？
-通常 Google 之後就會發現，Ruby 是 call by value 的，但是這個 call by value 跟以往所認知的 call by value 又不太ㄧ樣，
-讓我們來做個實驗：" />
+通常 Google 之後就會發現，Ruby 是 call by value 的，但是這個 call by value 跟以往所認知的 call by value 又不太ㄧ樣，讓我們來做個實驗：" />
   <meta name="author" content="HzChris" />
   
 
@@ -109,8 +108,7 @@
 <meta property="og:description" content="以前學計概的時候，知道參數傳遞有分為幾種方式，分別為 call by value，call by reference，以及 call by address
 (其實原本的說法裡沒有call by address，詳情後述)
 那麼，在 Ruby 中，參數是以什麼方式去進行傳遞的呢？
-通常 Google 之後就會發現，Ruby 是 call by value 的，但是這個 call by value 跟以往所認知的 call by value 又不太ㄧ樣，
-讓我們來做個實驗：" />
+通常 Google 之後就會發現，Ruby 是 call by value 的，但是這個 call by value 跟以往所認知的 call by value 又不太ㄧ樣，讓我們來做個實驗：" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://hzchirs.github.io/murmur/post/%E6%B7%BA%E8%AB%87ruby%E7%9A%84%E5%8F%83%E6%95%B8%E5%82%B3%E9%81%9E/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2017-08-30T12:36:52+08:00" />
@@ -121,10 +119,9 @@
 <meta itemprop="description" content="以前學計概的時候，知道參數傳遞有分為幾種方式，分別為 call by value，call by reference，以及 call by address
 (其實原本的說法裡沒有call by address，詳情後述)
 那麼，在 Ruby 中，參數是以什麼方式去進行傳遞的呢？
-通常 Google 之後就會發現，Ruby 是 call by value 的，但是這個 call by value 跟以往所認知的 call by value 又不太ㄧ樣，
-讓我們來做個實驗："><meta itemprop="datePublished" content="2017-08-30T12:36:52+08:00" />
+通常 Google 之後就會發現，Ruby 是 call by value 的，但是這個 call by value 跟以往所認知的 call by value 又不太ㄧ樣，讓我們來做個實驗："><meta itemprop="datePublished" content="2017-08-30T12:36:52+08:00" />
 <meta itemprop="dateModified" content="2017-08-30T12:36:52+08:00" />
-<meta itemprop="wordCount" content="282">
+<meta itemprop="wordCount" content="281">
 <meta itemprop="keywords" content="Ruby,Argument Passing," />
   
   <meta name="twitter:card" content="summary"/>
@@ -132,8 +129,7 @@
 <meta name="twitter:description" content="以前學計概的時候，知道參數傳遞有分為幾種方式，分別為 call by value，call by reference，以及 call by address
 (其實原本的說法裡沒有call by address，詳情後述)
 那麼，在 Ruby 中，參數是以什麼方式去進行傳遞的呢？
-通常 Google 之後就會發現，Ruby 是 call by value 的，但是這個 call by value 跟以往所認知的 call by value 又不太ㄧ樣，
-讓我們來做個實驗："/>
+通常 Google 之後就會發現，Ruby 是 call by value 的，但是這個 call by value 跟以往所認知的 call by value 又不太ㄧ樣，讓我們來做個實驗："/>
 
   
   
@@ -239,8 +235,7 @@
   <section><p>以前學計概的時候，知道參數傳遞有分為幾種方式，分別為 <code>call by value</code>，<code>call by reference</code>，以及 <code>call by address</code>
 (其實原本的說法裡沒有<code>call by address</code>，詳情後述)</p>
 <p>那麼，在 Ruby 中，參數是以什麼方式去進行傳遞的呢？
-通常 Google 之後就會發現，Ruby 是 <code>call by value</code> 的，但是這個 <code>call by value</code> 跟以往所認知的 <code>call by value</code> 又不太ㄧ樣，
-讓我們來做個實驗：</p>
+通常 Google 之後就會發現，Ruby 是 <code>call by value</code> 的，但是這個 <code>call by value</code> 跟以往所認知的 <code>call by value</code> 又不太ㄧ樣，讓我們來做個實驗：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">swap</span>(a, b)
 </span></span><span style="display:flex;"><span>  tmp <span style="color:#f92672">=</span> a
 </span></span><span style="display:flex;"><span>  a <span style="color:#f92672">=</span> b
@@ -291,7 +286,7 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>greeting(str)
 </span></span><span style="display:flex;"><span>p str <span style="color:#75715e">#=&gt; &#34;Hello, World&#34;</span>
-</span></span></code></pre></div><p>輸出來的結果如下：(object_id 會依電腦而不同)
+</span></span></code></pre></div><p>輸出結果如下：(<code>object_id</code> 會依電腦而不同)
 <img src="/murmur/img/call-by-address.png" alt="call-by-address"></p>
 <p>由此可知一開始 <code>string</code> 與 <code>str</code> 皆指向 <code>Hello, </code>，直到 <code>string = &quot;You can't see this&quot;</code> 時才改變了 <code>string</code> 所指的位址；
 所以在 ruby 中，當我們要把參數傳進一個方法時，所傳進去的其實是那個參數的值的 <strong>位址</strong>。</p>

@@ -307,9 +307,7 @@
 </span></span><span style="display:flex;"><span>| 2018-03-21 |
 </span></span><span style="display:flex;"><span>| 2018-03-22 |
 </span></span></code></pre></div><p>而至於該如何辨識出 Gap ，這就是就是問題的重點啦！
-我們先用 <code>ROW_NUMBER()</code> 這個 <a href="https://www.postgresql.org/docs/9.6/static/functions-window.html">Window
-Function</a> 在
-date 旁加上一個連續的數字欄位：</p>
+我們先用 <code>ROW_NUMBER()</code> 這個 <a href="https://www.postgresql.org/docs/9.6/static/functions-window.html">Window Function</a> 在 date 旁加上一個連續的數字欄位：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> date, ROW_NUMBER() OVER(<span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> date) <span style="color:#66d9ef">AS</span> row_number
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> user_visits;
 </span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span>| date       | row_number |
