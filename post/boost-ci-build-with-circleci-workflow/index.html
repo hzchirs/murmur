@@ -49,10 +49,11 @@
   
   
   
-  <meta name="description" content="財報狗用 CircleCI 有一段時間了，一開始用的時候還是 1.0， 2.0 還在 beta 階段。我們的專案在 1.0 上面一直運作良好，所以也沒有想說要換，直到 CircleCI 發佈 2018/8/31 之後將不再支援 1.0，我們才開始考慮要遷移專案 XD，順便趁着這次 的遷移導入的 2.0 的新功能: workflow。
-Workflow 簡介 CircleCI 在 2.0 中推出了 workflow 這個新功能，官網的介紹如下：
-A workflow is a set of rules for defining a collection of jobs and their run order. Workflows support complex job orchestration using a simple set of configuration keys to help you resolve failures sooner.
-簡單來說，workflow 提供了一種做法，讓你可以把 CI 的每個步驟拆分成一個個獨立的 jobs，jobs 之間遵照一定的執行順序或是並行，萬一發生失敗，只要針對失敗的 job 去做處理就好了，大大提升反應速度。" />
+  <meta name="description" content="
+財報狗用 CircleCI 有一段時間了，一開始用的時候還是 1.0，
+2.0 還在 beta 階段。我們的專案在 1.0 上面一直運作良好，所以也沒有想說要換，直到
+CircleCI 發佈 2018/8/31 之後將不再支援 1.0，我們才開始考慮要遷移專案 XD，順便趁着這次
+的遷移導入的 2.0 的新功能: workflow。" />
   <meta name="author" content="HzChris" />
   
 
@@ -105,10 +106,11 @@ A workflow is a set of rules for defining a collection of jobs and their run ord
   
   
   <meta property="og:title" content="CiricleCI Workflow: 讓 build 時間減少 50% 的設定心得" />
-<meta property="og:description" content="財報狗用 CircleCI 有一段時間了，一開始用的時候還是 1.0， 2.0 還在 beta 階段。我們的專案在 1.0 上面一直運作良好，所以也沒有想說要換，直到 CircleCI 發佈 2018/8/31 之後將不再支援 1.0，我們才開始考慮要遷移專案 XD，順便趁着這次 的遷移導入的 2.0 的新功能: workflow。
-Workflow 簡介 CircleCI 在 2.0 中推出了 workflow 這個新功能，官網的介紹如下：
-A workflow is a set of rules for defining a collection of jobs and their run order. Workflows support complex job orchestration using a simple set of configuration keys to help you resolve failures sooner.
-簡單來說，workflow 提供了一種做法，讓你可以把 CI 的每個步驟拆分成一個個獨立的 jobs，jobs 之間遵照一定的執行順序或是並行，萬一發生失敗，只要針對失敗的 job 去做處理就好了，大大提升反應速度。" />
+<meta property="og:description" content="
+財報狗用 CircleCI 有一段時間了，一開始用的時候還是 1.0，
+2.0 還在 beta 階段。我們的專案在 1.0 上面一直運作良好，所以也沒有想說要換，直到
+CircleCI 發佈 2018/8/31 之後將不再支援 1.0，我們才開始考慮要遷移專案 XD，順便趁着這次
+的遷移導入的 2.0 的新功能: workflow。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://hzchirs.github.io/murmur/post/boost-ci-build-with-circleci-workflow/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2018-06-16T11:43:14+08:00" />
@@ -116,20 +118,22 @@ A workflow is a set of rules for defining a collection of jobs and their run ord
 
   
   <meta itemprop="name" content="CiricleCI Workflow: 讓 build 時間減少 50% 的設定心得">
-<meta itemprop="description" content="財報狗用 CircleCI 有一段時間了，一開始用的時候還是 1.0， 2.0 還在 beta 階段。我們的專案在 1.0 上面一直運作良好，所以也沒有想說要換，直到 CircleCI 發佈 2018/8/31 之後將不再支援 1.0，我們才開始考慮要遷移專案 XD，順便趁着這次 的遷移導入的 2.0 的新功能: workflow。
-Workflow 簡介 CircleCI 在 2.0 中推出了 workflow 這個新功能，官網的介紹如下：
-A workflow is a set of rules for defining a collection of jobs and their run order. Workflows support complex job orchestration using a simple set of configuration keys to help you resolve failures sooner.
-簡單來說，workflow 提供了一種做法，讓你可以把 CI 的每個步驟拆分成一個個獨立的 jobs，jobs 之間遵照一定的執行順序或是並行，萬一發生失敗，只要針對失敗的 job 去做處理就好了，大大提升反應速度。"><meta itemprop="datePublished" content="2018-06-16T11:43:14+08:00" />
+<meta itemprop="description" content="
+財報狗用 CircleCI 有一段時間了，一開始用的時候還是 1.0，
+2.0 還在 beta 階段。我們的專案在 1.0 上面一直運作良好，所以也沒有想說要換，直到
+CircleCI 發佈 2018/8/31 之後將不再支援 1.0，我們才開始考慮要遷移專案 XD，順便趁着這次
+的遷移導入的 2.0 的新功能: workflow。"><meta itemprop="datePublished" content="2018-06-16T11:43:14+08:00" />
 <meta itemprop="dateModified" content="2018-06-16T11:43:14+08:00" />
 <meta itemprop="wordCount" content="362">
 <meta itemprop="keywords" content="CI,Workflow," />
   
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="CiricleCI Workflow: 讓 build 時間減少 50% 的設定心得"/>
-<meta name="twitter:description" content="財報狗用 CircleCI 有一段時間了，一開始用的時候還是 1.0， 2.0 還在 beta 階段。我們的專案在 1.0 上面一直運作良好，所以也沒有想說要換，直到 CircleCI 發佈 2018/8/31 之後將不再支援 1.0，我們才開始考慮要遷移專案 XD，順便趁着這次 的遷移導入的 2.0 的新功能: workflow。
-Workflow 簡介 CircleCI 在 2.0 中推出了 workflow 這個新功能，官網的介紹如下：
-A workflow is a set of rules for defining a collection of jobs and their run order. Workflows support complex job orchestration using a simple set of configuration keys to help you resolve failures sooner.
-簡單來說，workflow 提供了一種做法，讓你可以把 CI 的每個步驟拆分成一個個獨立的 jobs，jobs 之間遵照一定的執行順序或是並行，萬一發生失敗，只要針對失敗的 job 去做處理就好了，大大提升反應速度。"/>
+<meta name="twitter:description" content="
+財報狗用 CircleCI 有一段時間了，一開始用的時候還是 1.0，
+2.0 還在 beta 階段。我們的專案在 1.0 上面一直運作良好，所以也沒有想說要換，直到
+CircleCI 發佈 2018/8/31 之後將不再支援 1.0，我們才開始考慮要遷移專案 XD，順便趁着這次
+的遷移導入的 2.0 的新功能: workflow。"/>
 
   
   
@@ -327,8 +331,7 @@ CircleCI 發佈 2018/8/31 之後將不再支援 1.0，我們才開始考慮要�
 <h2 id="最後">最後&hellip;</h2>
 <p>還是對 workflow 的設定有些不瞭解的話，可以到我的
 <a href="https://gist.github.com/hzchirs/1040282e5b58df509155613c1d8dbee6">Gist</a> 看詳細的設定
-，有問題或是有什麼 CI 設定上的建議，也歡迎留言討論 😃。</p>
-</section>
+，有問題或是有什麼 CI 設定上的建議，也歡迎留言討論 😃。</p></section>
 
   
   

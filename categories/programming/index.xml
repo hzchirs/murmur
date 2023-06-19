@@ -14,10 +14,11 @@
       <pubDate>Sat, 16 Jun 2018 11:43:14 +0800</pubDate>
       
       <guid>https://hzchirs.github.io/murmur/post/boost-ci-build-with-circleci-workflow/</guid>
-      <description>財報狗用 CircleCI 有一段時間了，一開始用的時候還是 1.0， 2.0 還在 beta 階段。我們的專案在 1.0 上面一直運作良好，所以也沒有想說要換，直到 CircleCI 發佈 2018/8/31 之後將不再支援 1.0，我們才開始考慮要遷移專案 XD，順便趁着這次 的遷移導入的 2.0 的新功能: workflow。
-Workflow 簡介 CircleCI 在 2.0 中推出了 workflow 這個新功能，官網的介紹如下：
-A workflow is a set of rules for defining a collection of jobs and their run order. Workflows support complex job orchestration using a simple set of configuration keys to help you resolve failures sooner.
-簡單來說，workflow 提供了一種做法，讓你可以把 CI 的每個步驟拆分成一個個獨立的 jobs，jobs 之間遵照一定的執行順序或是並行，萬一發生失敗，只要針對失敗的 job 去做處理就好了，大大提升反應速度。</description>
+      <description>&lt;p&gt;&lt;img src=&#34;https://cdn-images-1.medium.com/max/2000/1*ZHsy56SNDn4lLwajoKyeAA.jpeg&#34; alt=&#34;fly-to-the-moon&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://statementdog.com/&#34;&gt;財報狗&lt;/a&gt;用 CircleCI 有一段時間了，一開始用的時候還是 1.0，
+2.0 還在 beta 階段。我們的專案在 1.0 上面一直運作良好，所以也沒有想說要換，直到
+CircleCI 發佈 2018/8/31 之後將不再支援 1.0，我們才開始考慮要遷移專案 XD，順便趁着這次
+的遷移導入的 2.0 的新功能: &lt;a href=&#34;https://circleci.com/docs/2.0/workflows/&#34;&gt;&lt;strong&gt;workflow&lt;/strong&gt;&lt;/a&gt;。&lt;/p&gt;</description>
     </item>
     
     <item>

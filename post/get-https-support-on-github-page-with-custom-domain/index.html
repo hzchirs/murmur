@@ -50,11 +50,7 @@
   
   
   <meta name="description" content="之前都是用 Gitlab &#43; Let&rsquo;s Encrypt 的方式來讓 blog 有綠色的鎖頭，不過 Let&rsquo;s Encrypt 每 90 天就要更新一次，有時候會因爲偷懶沒更新導致憑證過期XD，很不方便。
-直到不久前看到 Github Page 也開始支援自訂網域的 Https ，就花了點時間把部落格從 Gitlab 遷移到 Github 了。
-設定步驟 首先，到網域供應商那邊(我的是gandi) 把 CNAME 對應到個人的 github 頂層網域，我的 github 帳號是 hzchirs，所以頂層網域就是 hzchirs.github.io，而我希望把子網域 blog.hzchris.space 對應到 Github Page，所以設定會像這樣：
-注意: Hostname 欄位的 username.github.io. 最後面有個點，不要漏掉了。
-當設定完成之後，要數小時至一天才會生效，如果想要確定是否生效，可以使用 dig 來查詢，生效的自訂網域與 github.io 都應該指向同一個 IP：
-$ dig blog.hzchris.space &#43;noall &#43;answer sni.github.map.fastly.net. 735	IN	A	185.199.111.153 sni.github.map.fastly.net. 735	IN	A	185.199.110.153 sni.github.map.fastly.net. 735	IN	A	185.199.109.153 sni.github.map.fastly.net. 735	IN	A	185." />
+直到不久前看到 Github Page 也開始支援自訂網域的 Https ，就花了點時間把部落格從 Gitlab 遷移到 Github 了。" />
   <meta name="author" content="HzChris" />
   
 
@@ -108,11 +104,7 @@ $ dig blog.hzchris.space &#43;noall &#43;answer sni.github.map.fastly.net. 735	I
   
   <meta property="og:title" content="讓自訂網域的 Github Page 支援 HTTPS" />
 <meta property="og:description" content="之前都是用 Gitlab &#43; Let&rsquo;s Encrypt 的方式來讓 blog 有綠色的鎖頭，不過 Let&rsquo;s Encrypt 每 90 天就要更新一次，有時候會因爲偷懶沒更新導致憑證過期XD，很不方便。
-直到不久前看到 Github Page 也開始支援自訂網域的 Https ，就花了點時間把部落格從 Gitlab 遷移到 Github 了。
-設定步驟 首先，到網域供應商那邊(我的是gandi) 把 CNAME 對應到個人的 github 頂層網域，我的 github 帳號是 hzchirs，所以頂層網域就是 hzchirs.github.io，而我希望把子網域 blog.hzchris.space 對應到 Github Page，所以設定會像這樣：
-注意: Hostname 欄位的 username.github.io. 最後面有個點，不要漏掉了。
-當設定完成之後，要數小時至一天才會生效，如果想要確定是否生效，可以使用 dig 來查詢，生效的自訂網域與 github.io 都應該指向同一個 IP：
-$ dig blog.hzchris.space &#43;noall &#43;answer sni.github.map.fastly.net. 735	IN	A	185.199.111.153 sni.github.map.fastly.net. 735	IN	A	185.199.110.153 sni.github.map.fastly.net. 735	IN	A	185.199.109.153 sni.github.map.fastly.net. 735	IN	A	185." />
+直到不久前看到 Github Page 也開始支援自訂網域的 Https ，就花了點時間把部落格從 Gitlab 遷移到 Github 了。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://hzchirs.github.io/murmur/post/get-https-support-on-github-page-with-custom-domain/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2018-06-09T12:13:25+08:00" />
@@ -121,11 +113,7 @@ $ dig blog.hzchris.space &#43;noall &#43;answer sni.github.map.fastly.net. 735	I
   
   <meta itemprop="name" content="讓自訂網域的 Github Page 支援 HTTPS">
 <meta itemprop="description" content="之前都是用 Gitlab &#43; Let&rsquo;s Encrypt 的方式來讓 blog 有綠色的鎖頭，不過 Let&rsquo;s Encrypt 每 90 天就要更新一次，有時候會因爲偷懶沒更新導致憑證過期XD，很不方便。
-直到不久前看到 Github Page 也開始支援自訂網域的 Https ，就花了點時間把部落格從 Gitlab 遷移到 Github 了。
-設定步驟 首先，到網域供應商那邊(我的是gandi) 把 CNAME 對應到個人的 github 頂層網域，我的 github 帳號是 hzchirs，所以頂層網域就是 hzchirs.github.io，而我希望把子網域 blog.hzchris.space 對應到 Github Page，所以設定會像這樣：
-注意: Hostname 欄位的 username.github.io. 最後面有個點，不要漏掉了。
-當設定完成之後，要數小時至一天才會生效，如果想要確定是否生效，可以使用 dig 來查詢，生效的自訂網域與 github.io 都應該指向同一個 IP：
-$ dig blog.hzchris.space &#43;noall &#43;answer sni.github.map.fastly.net. 735	IN	A	185.199.111.153 sni.github.map.fastly.net. 735	IN	A	185.199.110.153 sni.github.map.fastly.net. 735	IN	A	185.199.109.153 sni.github.map.fastly.net. 735	IN	A	185."><meta itemprop="datePublished" content="2018-06-09T12:13:25+08:00" />
+直到不久前看到 Github Page 也開始支援自訂網域的 Https ，就花了點時間把部落格從 Gitlab 遷移到 Github 了。"><meta itemprop="datePublished" content="2018-06-09T12:13:25+08:00" />
 <meta itemprop="dateModified" content="2018-06-09T12:13:25+08:00" />
 <meta itemprop="wordCount" content="131">
 <meta itemprop="keywords" content="Github Pages," />
@@ -133,11 +121,7 @@ $ dig blog.hzchris.space &#43;noall &#43;answer sni.github.map.fastly.net. 735	I
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="讓自訂網域的 Github Page 支援 HTTPS"/>
 <meta name="twitter:description" content="之前都是用 Gitlab &#43; Let&rsquo;s Encrypt 的方式來讓 blog 有綠色的鎖頭，不過 Let&rsquo;s Encrypt 每 90 天就要更新一次，有時候會因爲偷懶沒更新導致憑證過期XD，很不方便。
-直到不久前看到 Github Page 也開始支援自訂網域的 Https ，就花了點時間把部落格從 Gitlab 遷移到 Github 了。
-設定步驟 首先，到網域供應商那邊(我的是gandi) 把 CNAME 對應到個人的 github 頂層網域，我的 github 帳號是 hzchirs，所以頂層網域就是 hzchirs.github.io，而我希望把子網域 blog.hzchris.space 對應到 Github Page，所以設定會像這樣：
-注意: Hostname 欄位的 username.github.io. 最後面有個點，不要漏掉了。
-當設定完成之後，要數小時至一天才會生效，如果想要確定是否生效，可以使用 dig 來查詢，生效的自訂網域與 github.io 都應該指向同一個 IP：
-$ dig blog.hzchris.space &#43;noall &#43;answer sni.github.map.fastly.net. 735	IN	A	185.199.111.153 sni.github.map.fastly.net. 735	IN	A	185.199.110.153 sni.github.map.fastly.net. 735	IN	A	185.199.109.153 sni.github.map.fastly.net. 735	IN	A	185."/>
+直到不久前看到 Github Page 也開始支援自訂網域的 Https ，就花了點時間把部落格從 Gitlab 遷移到 Github 了。"/>
 
   
   
@@ -267,8 +251,7 @@ $ dig blog.hzchris.space &#43;noall &#43;answer sni.github.map.fastly.net. 735	I
 <p>有的話就大功告成啦。最後設定那邊應該會像下面這樣：</p>
 <p><img src="/murmur/img/github-page-setting.png" alt="Github Page 設定"></p>
 <p>這邊要注意一件事，如果 repository 原本就已經有設定 custom domain 的話，需要先清掉再重新輸入一次，才能讓 HTTPS 成功運作。</p>
-<p>Github Page 這次的更新其實不止是支援 HTTPS，同時還可以享有 CDN，因此遷移之後速度變快非常有感，只是官方的文件寫的不是非常清楚，多繞了一點路，如果在設定上遇到問題的話，也歡迎留言討論😃。</p>
-</section>
+<p>Github Page 這次的更新其實不止是支援 HTTPS，同時還可以享有 CDN，因此遷移之後速度變快非常有感，只是官方的文件寫的不是非常清楚，多繞了一點路，如果在設定上遇到問題的話，也歡迎留言討論😃。</p></section>
 
   
   
