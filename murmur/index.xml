@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Murmurs on HzChris</title>
+    <link>https://hzchirs.github.io/murmur/murmur/</link>
+    <description>Recent content in Murmurs on HzChris</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-tw</language>
+    <copyright>Copyright © 2023 by HzChris</copyright>
+    <lastBuildDate>Mon, 19 Jun 2023 18:33:25 +0800</lastBuildDate><atom:link href="https://hzchirs.github.io/murmur/murmur/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>20230619183325</title>
+      <link>https://hzchirs.github.io/murmur/murmur/20230619183325/</link>
+      <pubDate>Mon, 19 Jun 2023 18:33:25 +0800</pubDate>
+      
+      <guid>https://hzchirs.github.io/murmur/murmur/20230619183325/</guid>
+      <description>看完了幾個 GPT 官方推薦的 prompt 資源，覺得其實建議與 model 溝通的技巧跟人也差不多，在需求的描述上要盡量詳細具體、可以的話多提供範例與詳細步驟。如果原本就善於寫詳細 spec 的人，應該會覺得還滿好上手的。</description>
+    </item>
+    
+  </channel>
+</rss>

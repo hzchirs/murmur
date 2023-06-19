@@ -10,10 +10,10 @@
     <lastBuildDate>Sat, 16 Jun 2018 11:43:14 +0800</lastBuildDate><atom:link href="https://hzchirs.github.io/murmur/categories/programming/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>CiricleCI Workflow: 讓 build 時間減少 50% 的設定心得</title>
-      <link>https://hzchirs.github.io/murmur/post/boost-ci-build-with-circleci-workflow/</link>
+      <link>https://hzchirs.github.io/murmur/posts/boost-ci-build-with-circleci-workflow/</link>
       <pubDate>Sat, 16 Jun 2018 11:43:14 +0800</pubDate>
       
-      <guid>https://hzchirs.github.io/murmur/post/boost-ci-build-with-circleci-workflow/</guid>
+      <guid>https://hzchirs.github.io/murmur/posts/boost-ci-build-with-circleci-workflow/</guid>
       <description>&lt;p&gt;&lt;img src=&#34;https://cdn-images-1.medium.com/max/2000/1*ZHsy56SNDn4lLwajoKyeAA.jpeg&#34; alt=&#34;fly-to-the-moon&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://statementdog.com/&#34;&gt;財報狗&lt;/a&gt;用 CircleCI 有一段時間了，一開始用的時候還是 1.0，
 2.0 還在 beta 階段。我們的專案在 1.0 上面一直運作良好，所以也沒有想說要換，直到
@@ -23,10 +23,10 @@ CircleCI 發佈 2018/8/31 之後將不再支援 1.0，我們才開始考慮要�
     
     <item>
       <title>如何在 PostgreSQL 中找出連續日期</title>
-      <link>https://hzchirs.github.io/murmur/post/how-to-find-consecutive-dates-in-postgresql/</link>
+      <link>https://hzchirs.github.io/murmur/posts/how-to-find-consecutive-dates-in-postgresql/</link>
       <pubDate>Sat, 12 May 2018 22:07:56 +0800</pubDate>
       
-      <guid>https://hzchirs.github.io/murmur/post/how-to-find-consecutive-dates-in-postgresql/</guid>
+      <guid>https://hzchirs.github.io/murmur/posts/how-to-find-consecutive-dates-in-postgresql/</guid>
       <description>&lt;p&gt;工作上需要從資料庫找出使用者連續上站天數，
 找了一些相關的資源，其實解法相當多，但大多都是 SQL Server 的解法，
 從中找了一個比較&lt;a href=&#34;https://stackoverflow.com/questions/20402089/detect-consecutive-dates-ranges-using-sql&#34;&gt;簡單優雅的&lt;/a&gt;

@@ -2,19 +2,25 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://hzchirs.github.io/murmur/murmur/20230619183325/</loc>
+    <lastmod>2023-06-19T18:33:25+08:00</lastmod>
+  </url><url>
+    <loc>https://hzchirs.github.io/murmur/</loc>
+    <lastmod>2023-06-19T18:33:25+08:00</lastmod>
+  </url><url>
+    <loc>https://hzchirs.github.io/murmur/murmur/</loc>
+    <lastmod>2023-06-19T18:33:25+08:00</lastmod>
+  </url><url>
     <loc>https://hzchirs.github.io/murmur/categories/</loc>
     <lastmod>2018-06-16T11:43:14+08:00</lastmod>
   </url><url>
     <loc>https://hzchirs.github.io/murmur/tags/ci/</loc>
     <lastmod>2018-06-16T11:43:14+08:00</lastmod>
   </url><url>
-    <loc>https://hzchirs.github.io/murmur/post/boost-ci-build-with-circleci-workflow/</loc>
+    <loc>https://hzchirs.github.io/murmur/posts/boost-ci-build-with-circleci-workflow/</loc>
     <lastmod>2018-06-16T11:43:14+08:00</lastmod>
   </url><url>
-    <loc>https://hzchirs.github.io/murmur/</loc>
-    <lastmod>2018-06-16T11:43:14+08:00</lastmod>
-  </url><url>
-    <loc>https://hzchirs.github.io/murmur/post/</loc>
+    <loc>https://hzchirs.github.io/murmur/posts/</loc>
     <lastmod>2018-06-16T11:43:14+08:00</lastmod>
   </url><url>
     <loc>https://hzchirs.github.io/murmur/categories/programming/</loc>
@@ -32,7 +38,7 @@
     <loc>https://hzchirs.github.io/murmur/categories/tools/</loc>
     <lastmod>2018-06-09T12:13:25+08:00</lastmod>
   </url><url>
-    <loc>https://hzchirs.github.io/murmur/post/get-https-support-on-github-page-with-custom-domain/</loc>
+    <loc>https://hzchirs.github.io/murmur/posts/get-https-support-on-github-page-with-custom-domain/</loc>
     <lastmod>2018-06-09T12:13:25+08:00</lastmod>
   </url><url>
     <loc>https://hzchirs.github.io/murmur/tags/database/</loc>
@@ -41,10 +47,10 @@
     <loc>https://hzchirs.github.io/murmur/tags/sql/</loc>
     <lastmod>2018-05-12T22:07:56+08:00</lastmod>
   </url><url>
-    <loc>https://hzchirs.github.io/murmur/post/how-to-find-consecutive-dates-in-postgresql/</loc>
+    <loc>https://hzchirs.github.io/murmur/posts/how-to-find-consecutive-dates-in-postgresql/</loc>
     <lastmod>2018-05-12T22:07:56+08:00</lastmod>
   </url><url>
-    <loc>https://hzchirs.github.io/murmur/post/unboxing-hhkb-layout-xd60-with-maxkey-ashen-and-xda-pbt-the-max/</loc>
+    <loc>https://hzchirs.github.io/murmur/posts/unboxing-hhkb-layout-xd60-with-maxkey-ashen-and-xda-pbt-the-max/</loc>
     <lastmod>2017-11-18T09:20:36+08:00</lastmod>
   </url><url>
     <loc>https://hzchirs.github.io/murmur/tags/%E6%A9%9F%E6%A2%B0%E9%8D%B5%E7%9B%A4/</loc>
@@ -65,13 +71,13 @@
     <loc>https://hzchirs.github.io/murmur/tags/ruby/</loc>
     <lastmod>2017-08-30T12:36:52+08:00</lastmod>
   </url><url>
-    <loc>https://hzchirs.github.io/murmur/post/%E6%B7%BA%E8%AB%87ruby%E7%9A%84%E5%8F%83%E6%95%B8%E5%82%B3%E9%81%9E/</loc>
+    <loc>https://hzchirs.github.io/murmur/posts/%E6%B7%BA%E8%AB%87ruby%E7%9A%84%E5%8F%83%E6%95%B8%E5%82%B3%E9%81%9E/</loc>
     <lastmod>2017-08-30T12:36:52+08:00</lastmod>
   </url><url>
     <loc>https://hzchirs.github.io/murmur/tags/gitlab-pages/</loc>
     <lastmod>2017-07-26T09:44:54+08:00</lastmod>
   </url><url>
-    <loc>https://hzchirs.github.io/murmur/post/use-gitlab-pages-instead-of-github-pages/</loc>
+    <loc>https://hzchirs.github.io/murmur/posts/use-gitlab-pages-instead-of-github-pages/</loc>
     <lastmod>2017-07-26T09:44:54+08:00</lastmod>
   </url><url>
     <loc>https://hzchirs.github.io/murmur/tags/programming/</loc>
@@ -80,7 +86,7 @@
     <loc>https://hzchirs.github.io/murmur/tags/rails/</loc>
     <lastmod>2017-06-22T11:58:09+08:00</lastmod>
   </url><url>
-    <loc>https://hzchirs.github.io/murmur/post/rails-query-object-pattern/</loc>
+    <loc>https://hzchirs.github.io/murmur/posts/rails-query-object-pattern/</loc>
     <lastmod>2017-06-22T11:58:09+08:00</lastmod>
   </url><url>
     <loc>https://hzchirs.github.io/murmur/tags/refactor/</loc>
@@ -89,7 +95,7 @@
     <loc>https://hzchirs.github.io/murmur/tags/migration/</loc>
     <lastmod>2016-12-10T11:58:09+08:00</lastmod>
   </url><url>
-    <loc>https://hzchirs.github.io/murmur/post/rails-dangerous-migration/</loc>
+    <loc>https://hzchirs.github.io/murmur/posts/rails-dangerous-migration/</loc>
     <lastmod>2016-12-10T11:58:09+08:00</lastmod>
   </url>
 </urlset>

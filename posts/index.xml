@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on HzChris</title>
-    <link>https://hzchirs.github.io/murmur/post/</link>
+    <link>https://hzchirs.github.io/murmur/posts/</link>
     <description>Recent content in Posts on HzChris</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
     <copyright>Copyright © 2023 by HzChris</copyright>
-    <lastBuildDate>Sat, 16 Jun 2018 11:43:14 +0800</lastBuildDate><atom:link href="https://hzchirs.github.io/murmur/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 16 Jun 2018 11:43:14 +0800</lastBuildDate><atom:link href="https://hzchirs.github.io/murmur/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>CiricleCI Workflow: 讓 build 時間減少 50% 的設定心得</title>
-      <link>https://hzchirs.github.io/murmur/post/boost-ci-build-with-circleci-workflow/</link>
+      <link>https://hzchirs.github.io/murmur/posts/boost-ci-build-with-circleci-workflow/</link>
       <pubDate>Sat, 16 Jun 2018 11:43:14 +0800</pubDate>
       
-      <guid>https://hzchirs.github.io/murmur/post/boost-ci-build-with-circleci-workflow/</guid>
+      <guid>https://hzchirs.github.io/murmur/posts/boost-ci-build-with-circleci-workflow/</guid>
       <description>&lt;p&gt;&lt;img src=&#34;https://cdn-images-1.medium.com/max/2000/1*ZHsy56SNDn4lLwajoKyeAA.jpeg&#34; alt=&#34;fly-to-the-moon&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://statementdog.com/&#34;&gt;財報狗&lt;/a&gt;用 CircleCI 有一段時間了，一開始用的時候還是 1.0，
 2.0 還在 beta 階段。我們的專案在 1.0 上面一直運作良好，所以也沒有想說要換，直到
@@ -23,20 +23,20 @@ CircleCI 發佈 2018/8/31 之後將不再支援 1.0，我們才開始考慮要�
     
     <item>
       <title>讓自訂網域的 Github Page 支援 HTTPS</title>
-      <link>https://hzchirs.github.io/murmur/post/get-https-support-on-github-page-with-custom-domain/</link>
+      <link>https://hzchirs.github.io/murmur/posts/get-https-support-on-github-page-with-custom-domain/</link>
       <pubDate>Sat, 09 Jun 2018 12:13:25 +0800</pubDate>
       
-      <guid>https://hzchirs.github.io/murmur/post/get-https-support-on-github-page-with-custom-domain/</guid>
+      <guid>https://hzchirs.github.io/murmur/posts/get-https-support-on-github-page-with-custom-domain/</guid>
       <description>&lt;p&gt;之前都是用 Gitlab + Let&amp;rsquo;s Encrypt 的方式來讓 blog 有綠色的鎖頭，不過 Let&amp;rsquo;s Encrypt 每 90 天就要更新一次，有時候會因爲偷懶沒更新導致憑證過期XD，很不方便。&lt;/p&gt;
 &lt;p&gt;直到不久前看到 Github Page 也開始&lt;a href=&#34;https://blog.github.com/2018-05-01-github-pages-custom-domains-https/&#34;&gt;支援自訂網域的 Https&lt;/a&gt; ，就花了點時間把部落格從 Gitlab 遷移到 Github 了。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>如何在 PostgreSQL 中找出連續日期</title>
-      <link>https://hzchirs.github.io/murmur/post/how-to-find-consecutive-dates-in-postgresql/</link>
+      <link>https://hzchirs.github.io/murmur/posts/how-to-find-consecutive-dates-in-postgresql/</link>
       <pubDate>Sat, 12 May 2018 22:07:56 +0800</pubDate>
       
-      <guid>https://hzchirs.github.io/murmur/post/how-to-find-consecutive-dates-in-postgresql/</guid>
+      <guid>https://hzchirs.github.io/murmur/posts/how-to-find-consecutive-dates-in-postgresql/</guid>
       <description>&lt;p&gt;工作上需要從資料庫找出使用者連續上站天數，
 找了一些相關的資源，其實解法相當多，但大多都是 SQL Server 的解法，
 從中找了一個比較&lt;a href=&#34;https://stackoverflow.com/questions/20402089/detect-consecutive-dates-ranges-using-sql&#34;&gt;簡單優雅的&lt;/a&gt;
@@ -47,10 +47,10 @@ CircleCI 發佈 2018/8/31 之後將不再支援 1.0，我們才開始考慮要�
     
     <item>
       <title>HHKB layout 的客制鍵盤 &#43; Maxkey 灰階 &#43; XDA 球帽開箱</title>
-      <link>https://hzchirs.github.io/murmur/post/unboxing-hhkb-layout-xd60-with-maxkey-ashen-and-xda-pbt-the-max/</link>
+      <link>https://hzchirs.github.io/murmur/posts/unboxing-hhkb-layout-xd60-with-maxkey-ashen-and-xda-pbt-the-max/</link>
       <pubDate>Sat, 18 Nov 2017 09:20:36 +0800</pubDate>
       
-      <guid>https://hzchirs.github.io/murmur/post/unboxing-hhkb-layout-xd60-with-maxkey-ashen-and-xda-pbt-the-max/</guid>
+      <guid>https://hzchirs.github.io/murmur/posts/unboxing-hhkb-layout-xd60-with-maxkey-ashen-and-xda-pbt-the-max/</guid>
       <description>&lt;p&gt;一直想要組一個跟 HHKB 一樣配置的機械鍵盤放在公司，除了再買一隻 HHKB 之外，
 似乎就只有客製化一途；剛好在 Facebook 看到機械鍵盤愛好者的社團有在幫忙組客製化鍵盤，
 在做了一些詢問之後就下訂了，後來才知道社團版主是鍵鼠版名人貝瑞大。
@@ -59,10 +59,10 @@ CircleCI 發佈 2018/8/31 之後將不再支援 1.0，我們才開始考慮要�
     
     <item>
       <title>淺談Ruby的參數傳遞</title>
-      <link>https://hzchirs.github.io/murmur/post/%E6%B7%BA%E8%AB%87ruby%E7%9A%84%E5%8F%83%E6%95%B8%E5%82%B3%E9%81%9E/</link>
+      <link>https://hzchirs.github.io/murmur/posts/%E6%B7%BA%E8%AB%87ruby%E7%9A%84%E5%8F%83%E6%95%B8%E5%82%B3%E9%81%9E/</link>
       <pubDate>Wed, 30 Aug 2017 12:36:52 +0800</pubDate>
       
-      <guid>https://hzchirs.github.io/murmur/post/%E6%B7%BA%E8%AB%87ruby%E7%9A%84%E5%8F%83%E6%95%B8%E5%82%B3%E9%81%9E/</guid>
+      <guid>https://hzchirs.github.io/murmur/posts/%E6%B7%BA%E8%AB%87ruby%E7%9A%84%E5%8F%83%E6%95%B8%E5%82%B3%E9%81%9E/</guid>
       <description>&lt;p&gt;以前學計概的時候，知道參數傳遞有分為幾種方式，分別為 &lt;code&gt;call by value&lt;/code&gt;，&lt;code&gt;call by reference&lt;/code&gt;，以及 &lt;code&gt;call by address&lt;/code&gt;
 (其實原本的說法裡沒有&lt;code&gt;call by address&lt;/code&gt;，詳情後述)&lt;/p&gt;
 &lt;p&gt;那麼，在 Ruby 中，參數是以什麼方式去進行傳遞的呢？
@@ -71,20 +71,20 @@ CircleCI 發佈 2018/8/31 之後將不再支援 1.0，我們才開始考慮要�
     
     <item>
       <title>用 Gitlab Pages 取代 Github Pages 建立靜態網站</title>
-      <link>https://hzchirs.github.io/murmur/post/use-gitlab-pages-instead-of-github-pages/</link>
+      <link>https://hzchirs.github.io/murmur/posts/use-gitlab-pages-instead-of-github-pages/</link>
       <pubDate>Wed, 26 Jul 2017 09:44:54 +0800</pubDate>
       
-      <guid>https://hzchirs.github.io/murmur/post/use-gitlab-pages-instead-of-github-pages/</guid>
+      <guid>https://hzchirs.github.io/murmur/posts/use-gitlab-pages-instead-of-github-pages/</guid>
       <description>&lt;p&gt;前幾天發現 Github Page  自訂 domain 無法支援 SSL 之後，就開始在尋找替代的解法。
 後來發現 Gitlab 也推出了 Gitlab Pages，在設定上跟 Github 相當類似，幾乎可以無痛轉移，而且還有一些Github 沒有的優勢：&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Rails 專案重構之 Query Object Pattern</title>
-      <link>https://hzchirs.github.io/murmur/post/rails-query-object-pattern/</link>
+      <link>https://hzchirs.github.io/murmur/posts/rails-query-object-pattern/</link>
       <pubDate>Thu, 22 Jun 2017 11:58:09 +0800</pubDate>
       
-      <guid>https://hzchirs.github.io/murmur/post/rails-query-object-pattern/</guid>
+      <guid>https://hzchirs.github.io/murmur/posts/rails-query-object-pattern/</guid>
       <description>&lt;p&gt;在 Rails 專案中，資料查詢是幾乎不可避免的事情，幸好 Rails 裡有 ActiveRecord 可以幫助我們少寫許多的 SQL，
 讓程式碼看起來更簡潔易讀，如果是常用的查詢也可以抽成 scope。
 但隨著專案成長，對於資料查詢的需求通常會愈來愈大，query 的邏輯也愈趨複雜，此時會發現 controller 跟 model 漸漸充斥著雜亂的 query。&lt;/p&gt;
@@ -93,10 +93,10 @@ CircleCI 發佈 2018/8/31 之後將不再支援 1.0，我們才開始考慮要�
     
     <item>
       <title>Rails: 不安全的 migration</title>
-      <link>https://hzchirs.github.io/murmur/post/rails-dangerous-migration/</link>
+      <link>https://hzchirs.github.io/murmur/posts/rails-dangerous-migration/</link>
       <pubDate>Sat, 10 Dec 2016 11:58:09 +0800</pubDate>
       
-      <guid>https://hzchirs.github.io/murmur/post/rails-dangerous-migration/</guid>
+      <guid>https://hzchirs.github.io/murmur/posts/rails-dangerous-migration/</guid>
       <description>&lt;p&gt;在 Rails 建立 migration 是一個很常見的行為，但是魔鬼藏在細節裡，悲劇往往就是在認為一切都理所當然的時候發生。&lt;/p&gt;
 &lt;p&gt;想像一個情境：
 目前有一個由 Rails5 ActionCable 開發的聊天室，運作良好，有數百萬筆訊息存在 Message 這個 model。有天老闆心血來潮，要你幫這個聊天室加上『已讀』功能，你會怎麼做？&lt;/p&gt;</description>
